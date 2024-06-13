@@ -1,7 +1,7 @@
 -- Création de la table adress
 
 CREATE TABLE IF NOT EXISTS `adress` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY ,
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
     `adress` VARCHAR(255),
     `zip_code` INT,
     `city` VARCHAR(255),
@@ -138,11 +138,11 @@ INSERT INTO `logement_equipement` (`logement_id`, `equipement_id`) VALUES
     (3, 3),
     (4, 4),
     (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10);
+    (6, 1),
+    (7, 2),
+    (8, 3),
+    (9, 4),
+    (10, 5);
     
  
 
@@ -161,8 +161,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
     );
 
-INSERT INTO `reservation` (`date_start`, `date_end`, `nb_adult`, `nb_child`, `price_total`, `logement_id`, `user_id`) VALUES
-    (),
+
 
 
 -- Création de la table favoris
@@ -174,8 +173,7 @@ INSERT INTO `reservation` (`date_start`, `date_end`, `nb_adult`, `nb_child`, `pr
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
     );
  
-  INSERT INTO `favoris` (`logement_id`, `user_id`) VALUES
-    (''),
+
  
 
 -- Création de la table media
@@ -188,6 +186,3 @@ CREATE TABLE IF NOT EXISTS `media` (
     `logement_id` INT,
     FOREIGN KEY (`logement_id`) REFERENCES `logement`(`id`)
     );
-
-    INSERT INTO `media` (`label`, `image_path`, `is_active`, `logement_id`) VALUES
-    (''),
