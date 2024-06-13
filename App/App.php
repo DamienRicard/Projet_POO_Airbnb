@@ -14,7 +14,7 @@ class App implements DatabaseConfigInterface
 {
 
   private static ?self $instance = null;
-  //on crée une méthode public appelé au demarrage de l'appli dans index.php
+  //on crée une méthode public appelée au demarrage de l'appli dans index.php
   public static function getApp(): self
   {
     if (is_null(self::$instance)) {
@@ -37,7 +37,7 @@ class App implements DatabaseConfigInterface
     $this->router = Router::create();
   }
 
-  //on a 3 méthodes a définir 
+  //on a 3 méthodes à définir 
   // 1. méthode start pour activer le router
   public function start(): void
   {
@@ -56,6 +56,10 @@ class App implements DatabaseConfigInterface
     $this->router->get('/', [HomeController::class, 'home'] );
     //INFO: si on veut renvoyer une vue à l'utilisateur => route en "get"
     //INFO: si on veut traiter des données d'un formulaire => route en "post"
+
+    // PARTIE AUTHENTIFICATION
+
+    // PARTIE UTILISATEUR
 
   }
 
