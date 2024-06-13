@@ -38,47 +38,47 @@ class AppRepoManager
   //  return $this->Repository;
   //}
 
-  public function AdressRepository(): AdressRepository
+  public function getAdressRepository(): AdressRepository
   {
     return $this->adressRepository;
   }
 
-  public function EquipementRepository(): EquipementRepository
+  public function getEquipementRepository(): EquipementRepository
   {
     return $this->equipementRepository;
   }
 
-  public function FavorisRepository(): FavorisRepository
+  public function getFavorisRepository(): FavorisRepository
   {
     return $this->favorisRepository;
   }
 
-  public function LogementEquipementRepository(): LogementEquipementRepository
+  public function getLogementEquipementRepository(): LogementEquipementRepository
   {
     return $this->logementEquipementRepository;
   }
 
-  public function LogementRepository(): LogementRepository
+  public function getLogementRepository(): LogementRepository
   {
     return $this->logementRepository;
   }
 
-  public function MediaRepository(): MediaRepository
+  public function getMediaRepository(): MediaRepository
   {
     return $this->mediaRepository;
   }
 
-  public function ReservationRepository(): ReservationRepository
+  public function getReservationRepository(): ReservationRepository
   {
     return $this->reservationRepository;
   }
 
-  public function TypeLogementRepository(): TypeLogementRepository
+  public function getTypeLogementRepository(): TypeLogementRepository
   {
     return $this->typeLogementRepository;
   }
 
-  public function UserRepository(): UserRepository
+  public function getUserRepository(): UserRepository
   {
     return $this->userRepository;
   }
