@@ -2,8 +2,7 @@
       <!-- logo -->
       <div class="nav-logo">
         <a href="/">
-          <!-- <img  src="/dir/vers/logo" alt="logo appli"> -->
-          <h3>Logo</h3>
+          <img  src="../assets/images/logo_airbnb.png" alt="logo application Airbnb">
         </a>
       </div>
 
@@ -23,7 +22,7 @@
         <nav >
           <ul >
             <li >
-              <a href="#">Se connecter
+              <a href="/inscription">Se connecter
                 <i class="bi bi-person custom-svg"></i>
               </a>
 

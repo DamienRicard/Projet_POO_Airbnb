@@ -51,7 +51,7 @@ INSERT INTO `user` (`email`, `password`, `lastname`, `firstname`, `is_active`, `
  
 -- Création de la table typelogement
 
-CREATE TABLE IF NOT EXISTS `typelogement` (
+CREATE TABLE IF NOT EXISTS `type_logement` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `label` VARCHAR(255),
     `image_path` VARCHAR(255),

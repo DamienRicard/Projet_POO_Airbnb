@@ -2,13 +2,14 @@
 
 namespace App;
 
+use MiladRahimi\PhpRouter\Router;
 use App\Controller\AuthController;
 use App\Controller\HomeController;
 use App\Controller\PizzaController;
+use App\Controller\LogementController;
 use Core\Database\DatabaseConfigInterface;
-use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
 use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
-use MiladRahimi\PhpRouter\Router;
+use MiladRahimi\PhpRouter\Exceptions\InvalidCallableException;
 
 class App implements DatabaseConfigInterface
 {
@@ -58,8 +59,12 @@ class App implements DatabaseConfigInterface
     //INFO: si on veut traiter des données d'un formulaire => route en "post"
 
     // PARTIE AUTHENTIFICATION
+    $this->router->get('/inscription', [AuthController::class, 'registerForm'] );
 
     // PARTIE UTILISATEUR
+
+    //PARTIE LOGEMENTS
+    $this->router->get('/logements', [LogementController::class, 'getLogements']);
 
   }
 

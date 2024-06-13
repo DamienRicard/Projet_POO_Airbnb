@@ -13,7 +13,7 @@ class Logement extends Model
   public int $nb_bath;
   public int $nb_traveler;
   public bool $is_active;
-  public string $type_logement;
+  public int $type_logement_id;
   public int $user_id;
   public int $adress_id;
 }
