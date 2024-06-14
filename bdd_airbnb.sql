@@ -37,16 +37,16 @@ CREATE TABLE IF NOT EXISTS `user` (
     );
 
 INSERT INTO `user` (`email`, `password`, `lastname`, `firstname`, `is_active`, `adress_id`) VALUES
-    ('user1@example.com', 'password1', 'Dupont', 'Jean', TRUE, 1),
-    ('user2@example.com', 'password2', 'Martin', 'Jacques', TRUE, 2),
-    ('user3@example.com', 'password3', 'Bernard', 'Pierre', TRUE, 3),
-    ('user4@example.com', 'password4', 'Thomas', 'Paul', TRUE, 4),
-    ('user5@example.com', 'password5', 'Petit', 'Nicolas', TRUE, 5),
-    ('user6@example.com', 'password6', 'Robert', 'Maxime', TRUE, 6),
-    ('user7@example.com', 'password7', 'Richard', 'François', TRUE, 7),
-    ('user8@example.com', 'password8', 'Lefevre', 'Julien', TRUE, 8),
-    ('user9@example.com', 'password9', 'Durand', 'Jérôme', TRUE, 9),
-    ('user10@example.com', 'password10', 'Moreau', 'Benjamin', TRUE, 10);
+    ('user1@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Dupont', 'Jean', TRUE, 1),
+    ('user2@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Martin', 'Jacques', TRUE, 2),
+    ('user3@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Bernard', 'Pierre', TRUE, 3),
+    ('user4@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Thomas', 'Paul', TRUE, 4),
+    ('user5@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Petit', 'Nicolas', TRUE, 5),
+    ('user6@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Robert', 'Maxime', TRUE, 6),
+    ('user7@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Richard', 'François', TRUE, 7),
+    ('user8@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Lefevre', 'Julien', TRUE, 8),
+    ('user9@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Durand', 'Jérôme', TRUE, 9),
+    ('user10@example.com', '$2y$10$NfSuSVCA1VFfffhk/6IX4.vGRlzI9axiV933qvRkksuTNEr1ncFrS', 'Moreau', 'Benjamin', TRUE, 10);
 
  
 -- Création de la table typelogement
@@ -114,11 +114,50 @@ CREATE TABLE IF NOT EXISTS `equipement` (
     );
 
 INSERT INTO `equipement` (`label`, `image_path`) VALUES
-    ('Wi-Fi gratuit', NULL),
-    ('Climatisation', NULL),
-    ('Lave-linge', NULL),
-    ('Cuisine équipée', NULL),
-    ('Proche des transports en commun', NULL);
+    ('Produits de nettoyage', 'produit.svg'),
+    ('Shampooing', 'shampooing.svg'),
+    ('Douche extérieure', 'douche-ex.svg'),
+    ('Eau chaude', 'eau-chaude.svg'),
+    ('Lave-linge', 'lave-linge.svg'),
+    ('Draps', 'draps.svg'),
+    ('Oreillers et couvertures supplémentaires', 'oreiller.svg'),
+    ('Stores', 'store.svg'),
+    ('Fer à repasser',  'fer.svg'),
+    ('Étendoir à linge', 'etendoir.svg'),
+    ('TV HD', 'tv.svg'),
+    ('Système audio', 'audio.svg'),
+    ('Lit pour bébé', 'lit-baby.svg'),
+    ('Lit parapluie', 'lit-parapluie.svg'),
+    ('Jouets et livres pour enfants',  'jouet.svg'),
+    ('Baignoire pour bébés', 'baignoir-baby.svg'),
+    ('Vaisselle pour enfants', 'vaisselle-baby.svg'),
+    ('Caches-prises', 'cache-prise.svg'),
+    ('Barrières de sécurité pour bébé', 'security-barriere.svg'),
+    ('Climatisation centrale', 'clim.svg'),
+    ('Chauffage central', 'chauffage.svg'),
+    ('Wi-Fi', 'wifi.svg'),
+    ('Espace de travail', 'bureau.svg'),
+    ('Cuisine', 'cuisine.svg'),
+    ('Réfrigérateur', 'frigo.svg'),
+    ('Four à micro-ondes', 'microndes.svg'),
+    ('Équipements de cuisine de base', 'ustensible.svg'),
+    ('Vaisselle et couverts', 'vaisselle.svg'),
+    ('Four', 'four.svg'),
+    ('Bouilloire électrique', 'bouilloire.svg'),
+    ('Cafetière', 'cafetiere.svg'),
+    ('Grille-pain', 'grille-pain.svg'),
+    ('Table à manger', 'table-manger.svg'),
+    ('Plaque de cuisson', 'plaque.svg'),
+    ('Entrée privée', 'entrer.svg'),
+    ('Entrée public', 'entrer.svg'),
+    ('Privé : patio ou balcon', 'balcon.svg'),
+    ('Mobilier extérieur', 'mobilier.svg'),
+    ('Espace repas en plein air', 'mobilier.svg'),
+    ('Barbecue', 'barbecue.svg'),
+    ('Vélos', 'velo.svg'),
+    ('Chaises longues', 'chaise-longue.svg'),
+    ('Parking privé (2 places)', 'voiture.svg'),
+    ('Parking gratuit dans la rue', 'voiture.svg');
 
 
 

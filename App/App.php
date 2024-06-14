@@ -60,11 +60,16 @@ class App implements DatabaseConfigInterface
 
     // PARTIE AUTHENTIFICATION
     $this->router->get('/inscription', [AuthController::class, 'registerForm'] );
+    $this->router->get('/connexion', [AuthController::class, 'loginForm']);
+    $this->router->post('/register',[AuthController::class, 'register']);
+    $this->router->post('/login',[AuthController::class, 'login']);
+    $this->router->get('/logout', [AuthController::class, 'logout']);
 
     // PARTIE UTILISATEUR
 
     //PARTIE LOGEMENTS
-    $this->router->get('/logements', [LogementController::class, 'getLogements']);
+    $this->router->get('/', [LogementController::class, 'getLogements']);
+    $this->router->get('/logement_detail/{id}', [LogementController::class, 'getLogementById']);
 
   }
 

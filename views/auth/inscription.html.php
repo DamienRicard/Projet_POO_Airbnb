@@ -1,10 +1,15 @@
-<!-- <?php //if($auth::isAuth()) $auth::redirect('/') ?> -->
+<?php if($auth::isAuth()) $auth::redirect('/') ?>
 
 <main class="container-form">
 
   <h1>Je crée mon compte</h1>
 
-
+<!-- affichage des erreurs s'il y en a -->
+<?php if($form_result && $form_result->hasErrors()): ?>
+    <div class="alert alert-danger" role="alert">
+      <?= $form_result->getErrors()[0]->getMessage() ?>
+    </div>
+  <?php endif ?>
 
   <form class="auth-form" action="/register" method="POST">
     <div class="box-auth-input">
