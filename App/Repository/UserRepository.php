@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Model\User;
+use Core\View\View;
 use Core\Repository\Repository;
 
 class UserRepository extends Repository
@@ -70,4 +71,7 @@ class UserRepository extends Repository
     }
     return $user ?? null;
   }
+
+
+  
 }

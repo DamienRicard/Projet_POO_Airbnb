@@ -42,49 +42,7 @@ class UserController extends Controller
 
 
 
-  /**
-   * Methode qui récupères les réservations par Id de l'utilisateur     todo: A FAIRE !!!!!!
-   * @param int $id
-   * @return array
-   */
-    public function getReservationById(int $id):array
-    {
-        //on déclare un tableau vide
-        $array_result = [];
-
-      //on crée la requête sql
-      $q = sprintf(
-        'SELECT * 
-        FROM `%s` 
-        WHERE `user_id` = :id
-        ORDER BY status DESC',
-        $this->getTableName()
-      );
-
-      //on prepare la requête
-      $stmt = $this->pdo->prepare($q);
-
-      //on exécute la requête
-      if(!$stmt->execute(['id' => $id])) return $array_result;
-
-      //on recupère les resultats
-      while($row_data = $stmt->fetch()){
-        $order = new Reservation($row_data);
-        //on va hydrater pour remplir order_rows
-        $order->order_rows = AppRepoManager::getRm()->getOrderRowRepository()->findOrderRowByOrder($order->id);
-
-        //on remplie notre tableau
-        $array_result[$order->status][] = $order;
-
-      } 
-
-      return $array_result;
-    
-
-       //on rend la vue
-       $view = new View('home/mes_reservations');
-       $view->render();
-    }
+ 
 }
 
 
