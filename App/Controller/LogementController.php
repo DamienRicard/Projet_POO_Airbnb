@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use Core\View\View;
 use App\AppRepoManager;
+use App\Model\Logement;
+use Core\Form\FormError;
+use Core\Form\FormResult;
 use Core\Session\Session;
 use Core\Controller\Controller;
+use Laminas\Diactoros\ServerRequest;
 
 class LogementController extends Controller
 {
@@ -58,6 +62,57 @@ class LogementController extends Controller
     $view = new View('home/logement_detail');
     $view->render($view_data);
   }
+
+
+  public function addLogement()
+  {
+      $view = new View('home/add_logement');
+      $view->render();
+  }
+
+  
+  public function addLogementForm(ServerRequest $request)
+  {
+    //on réceptionne les données du formulaire
+    $data_form = $request->getParsedBody();
+ 
+    //on instancie formResult pour stocker les messages d'erreurs
+    $form_result = new FormResult();
+    //on doit créer une instance de User
+    $logement = new Logement();
+
+    $title=$data_form['title'];
+    $pays=$data_form['pays'];
+    $ville=$data_form['ville'];
+    $zip_code=$data_form['zip_code'];
+    $size=$data_form['size'];
+    $description=$data_form['description'];
+    $nb_room=$data_form['nb_room'];
+    $nb_bed=$data_form['nb_bed'];
+    $nb_traveler=$data_form['nb_traveler'];
+    $price=$data_form['price'];
+
+    //on s'occupe de toutes les vérifications
+    if (
+      empty($title) ||
+      empty($pays) ||
+      empty($ville) ||
+      empty($zip_code) ||
+      empty($size) ||
+      empty($description) ||
+      empty($nb_room) ||
+      empty($nb_bed) ||
+      empty($nb_traveler) ||
+      empty($price)
+  
+    )
+    {
+      $form_result->addError(new FormError('Veuillez renseigner tous les champs'));
+    }
+   
+   
+  }
+    
 
 
 }

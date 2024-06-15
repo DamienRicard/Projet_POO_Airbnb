@@ -26,7 +26,7 @@ class LogementRepository extends Repository
     //on crée la requête sql
     //1$ et 2$ pour indiquer que c'est une jointure, 2 tables différentes. Avec sprintf on est obligé d'utiliser le %1$s (et %2$s si 2 tables)
     $query = sprintf(
-      'SELECT l.id, l.title, l.price_per_night, m.image_path
+      'SELECT l.id, l.title, l.price_per_night, l.taille, m.image_path
       FROM %1$s AS l
       INNER JOIN %2$s AS m ON l.`id` = m.`logement_id`
       WHERE l.`is_active` = 1 ;

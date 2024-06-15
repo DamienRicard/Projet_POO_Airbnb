@@ -1,3 +1,4 @@
+<?php use Core\Session\Session; ?>
     <div class="d-flex justify-content-around">
       <!-- logo -->
       <div class="nav-logo">
@@ -12,7 +13,7 @@
           <ul class="d-flex justify-content-center">
             <li class="m-4"><a href="/">Accueil</a></li>
             <li class="m-4"><a href="#">Logements</a></li>
-            <li class="m-4"><a href="#">Mettre mon logement sur Airbnb</a></li>
+            <li class="m-4"><a href="/add_logement">Mettre mon logement sur Airbnb</a></li>
           </ul>
         </nav>
       </div>
@@ -29,7 +30,7 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item custom-link" href="#">Mon profil</a></li>
-                    <li><a class="dropdown-item custom-link" href="# ">Mes réservations</a></li>
+                    <li><a class="dropdown-item custom-link" href="/mes_reservations/<?= Session::get(Session::USER)->id ?> ">Mes réservations</a></li>
                     <li><a class="dropdown-item custom-link" href="#">Mes logements en location</a></li>
                     <li>
                       <hr class="dropdown-divider">

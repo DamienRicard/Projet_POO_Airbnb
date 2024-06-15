@@ -14,6 +14,7 @@ class Logement extends Model
   public int $nb_bath;
   public int $nb_traveler;
   public bool $is_active;
+  public int $Taille;
 
   public int $type_logement_id;
   public int $user_id;

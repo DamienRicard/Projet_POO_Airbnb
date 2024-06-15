@@ -5,7 +5,7 @@ namespace App;
 use MiladRahimi\PhpRouter\Router;
 use App\Controller\AuthController;
 use App\Controller\HomeController;
-use App\Controller\PizzaController;
+use App\Controller\UserController;
 use App\Controller\LogementController;
 use Core\Database\DatabaseConfigInterface;
 use MiladRahimi\PhpRouter\Exceptions\RouteNotFoundException;
@@ -64,9 +64,16 @@ class App implements DatabaseConfigInterface
     $this->router->post('/register',[AuthController::class, 'register']);
     $this->router->post('/login',[AuthController::class, 'login']);
     $this->router->get('/logout', [AuthController::class, 'logout']);
+    
 
     // PARTIE UTILISATEUR
-
+    $this->router->get('/add_logement', [LogementController::class, 'addLogement']);
+    $this->router->post('/add_logement_form', [LogementController::class, 'addLogementForm']);
+   
+    $this->router->post('/reservation_form', [UserController::class, 'addReservationForm']);
+    $this->router->post('/mes_reservations/{id}', [UserController::class, 'getReservationById']);
+    $this->router->get('/mes_reservations', [UserController::class, 'getReservationById']);
+    
     //PARTIE LOGEMENTS
     $this->router->get('/', [LogementController::class, 'getLogements']);
     $this->router->get('/logement_detail/{id}', [LogementController::class, 'getLogementById']);
