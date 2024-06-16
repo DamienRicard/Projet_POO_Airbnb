@@ -30,7 +30,7 @@ ul, ol, li {
 
 /* Header styling */
 header {
-  background-color: #474747;
+  background-color: #1652b4;
   padding: 10px 0;
 }
 
@@ -70,7 +70,7 @@ header {
 
 /* Hover effect for links */
 .navbar ul li a:hover {
-  color: #5480e5;
+  color: rgb(255, 90, 95);
   border: 2px solid white;
   border-radius: 5px;
 }
@@ -151,7 +151,7 @@ nav ul li a {
 .profile-menu li a:hover {
   border: 2px solid white;
   border-radius: 5px;
-  color: #5480e5;
+  color: rgb(255, 90, 95);
 }
 
 
@@ -303,4 +303,39 @@ p:nth-child(2) span::after{
   background-color: #070707;
   color: rgb(255, 90, 95);
   font-weight: bold;
+}
+
+/* DETAIL DES LOGEMENTS */
+.card-detail{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.img-detail{
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  margin: 80px 0 100px 80px;
+}
+
+.reserver{
+  width: 200px;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #03da23;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.card-body-detail{
+  margin: 60px 20px 0 0;
+}
+
+.formulaire{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin-left: 80px;
 }

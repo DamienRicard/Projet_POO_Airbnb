@@ -4,12 +4,14 @@
 
 use Core\Session\Session; ?>
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body width-150">
-
-    <?php foreach ($logement->medias as $media) : ?>
-      <img src="/assets/images/<?= $media->image_path ?>" class="card-img-top" alt="">
+<div class="card card-detail">
+ <?php foreach ($logement->medias as $media) : ?>
+      <img src="/assets/images/<?= $media->image_path ?>" class="card-img-top img-detail" alt="">
     <?php endforeach; ?>
+
+  <div class="card-body card-body-detail">
+
+   
     <h1> <?= $logement->title ?> </h1>
     <p><?= $logement->description ?></p>
     <p>Type de logement : <?= $logement->type_logement->label ?></p>
@@ -23,7 +25,7 @@ use Core\Session\Session; ?>
 </div>
 
 
-<form action="/reservation_form" method="post" onsubmit="copierSpanDansHidden()">
+<form class="formulaire" action="/reservation_form" method="post" onsubmit="copierSpanDansHidden()">
   <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
   <h2>Réservations</h2>
 
@@ -34,5 +36,5 @@ use Core\Session\Session; ?>
 
   <h3>Total : <span id="total" name="price_total"> </span> €</h3>
   <input type="hidden" id="hidden_input" name="price_total"></input>
-  <button class="btn btn-success">Réserver</button>
+  <button class="reserver">Réserver</button>
 </form>
