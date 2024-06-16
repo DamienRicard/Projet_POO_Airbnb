@@ -1,5 +1,4 @@
 // convert today date to input format
- 
 const today = new Date().toISOString().split("T")[0];
  
 start_date.value = today;
@@ -50,3 +49,15 @@ function copierSpanDansHidden(){
   let spanValue = document.getElementById("total").innerText;
   document.getElementById("hidden_input").value= spanValue;
 }
+
+
+// Fonction pour générer un nombre aléatoire entre 3 et 5 avec 1 chiffre après la virgule
+function generateRandomNumber() {
+  let random = Math.random() * 2; // Génère un nombre entre 0 et 2
+  random += 3; // Maintenant, random est entre 3 et 5
+  return random.toFixed(1); // Formate le nombre avec 1 chiffre après la virgule
+}
+
+// Exemple d'utilisation : appeler la fonction et afficher le résultat
+let randomNumber = generateRandomNumber();
+document.getElementById('randomNumber').innerText = `${randomNumber}`;

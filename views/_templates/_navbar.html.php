@@ -1,31 +1,30 @@
 <?php use Core\Session\Session; ?>
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around align-items-center">
       <!-- logo -->
       <div class="nav-logo">
         <a href="/">
-          <img class="m-4" src="../assets/images/logo_airbnb.png" alt="logo application Airbnb">
+          <img class="logo" src="../assets/images/logo_airbnb.svg" alt="logo application Airbnb">
         </a>
       </div>
 
       <!--  barre de navigation -->
       <div>
-        <nav>
+        <nav class="navbar">
           <ul class="d-flex justify-content-center">
-            <li class="m-4"><a href="/">Accueil</a></li>
-            <li class="m-4"><a href="#">Logements</a></li>
-            <li class="m-4"><a href="/add_logement">Mettre mon logement sur Airbnb</a></li>
+            <li ><a href="/">Accueil</a></li>
+            <li ><a href="/add_logement">Mettre mon logement sur Airbnb</a></li>
           </ul>
         </nav>
       </div>
       <!-- menu du profil -->
       <div>
         <nav>
-          <ul>
+          <ul  class="profile-menu">
             <li>
               <!-- si je suis en session j'affiche mon compte -->
               <?php if ($auth::isAuth()) : ?>
                 <div class="dropdown custom-link">
-                  <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="dropdown-toggle profile-menu" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Mon compte <i class="bi bi-person custom-svg"> </i>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

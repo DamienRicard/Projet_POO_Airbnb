@@ -12,4 +12,295 @@ a {
 
 ul, ol, li {
   list-style: none;
+  padding: 0px;
+  margin-bottom: 0;
+}
+
+.logo{
+  width: 155px;
+  margin: 40px 20px;
+}
+
+.navbar{
+  margin: 40px 20px;
+}
+
+
+
+
+/* Header styling */
+header {
+  background-color: #474747;
+  padding: 10px 0;
+}
+
+/* Navigation container styling */
+.d-flex.justify-content-around {
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between !important;
+}
+
+/* Logo styling */
+.nav-logo img.logo {
+  height: 50px;
+  margin: 40px 10px 40px 20px;
+}
+
+/* Navigation menu styling */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Menu items styling */
+.navbar ul li {
+  margin: 0 20px;
+}
+
+/* Links styling */
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+  padding: 12px;
+}
+
+/* Hover effect for links */
+.navbar ul li a:hover {
+  color: #5480e5;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+/* Custom link styling */
+.custom-link {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+/* Icon styling */
+.custom-svg {
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+/* Profile menu styling */
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile menu items styling */
+nav ul li {
+  margin: 0 20px;
+}
+
+/* Profile menu links styling */
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  background-color: #444;
+  border: none;
+}
+
+/* Dropdown menu items styling */
+.dropdown-menu .dropdown-item {
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for dropdown menu items */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #555;
+}
+
+/* Profile menu styling */
+.profile-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile menu items styling */
+.profile-menu li {
+  margin: 0 20px;
+}
+
+/* Profile menu links styling */
+.profile-menu li a {
+  color: #fff;
+  font-size: 18px;
+  padding: 12px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Hover effect for profile menu links */
+.profile-menu li a:hover {
+  border: 2px solid white;
+  border-radius: 5px;
+  color: #5480e5;
+}
+
+
+/* Index Page */
+
+.text-center{
+  margin: 100px 0px;
+}
+
+/* Animation text */
+.paragraphe{
+  font-weight: 200;
+  text-transform: uppercase;
+  color: #0a0b0a;
+  /*color:transparent;*/
+  font-size: 0px;
+  text-shadow: 5px 5px 5px rgb(215, 208, 208);
+  margin-bottom: 40px;
+}
+
+p span{
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  font-size: clamp(10px, 8vw, 30px);
+  
+}
+
+.paragraphe span::after{
+  content: "";
+  display: block;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  transform: translateX(-100%);
+  background: crimson;
+}
+
+p:nth-child(1){     /*énième enfant de p, en l'occurance le 1er*/
+  font-weight: 300;
+  animation: txt-appearance 0s 1s forwards;
+}
+
+p:nth-child(2){     /*énième enfant de p, en l'occurance le deuxième*/
+  animation: txt-appearance 0s 1.25s forwards;
+}
+
+p:nth-child(1) span::after{
+  background: rgb(235, 0, 27);
+  animation: slide-in 0.75s ease-out forwards,
+  slide-out 0.75s 1s ease-out forwards;
+}
+p:nth-child(2) span::after{
+  background: rgb(235, 247, 4);
+  animation: slide-in 0.75s 0.3s ease-out forwards, /*délais de 0.3s, cette animation partira de 0.3s après l'autre*/
+  slide-out 0.75s 1.3s ease-out forwards;
+}
+
+@keyframes slide-in {
+  100% {
+      transform: translateX(0%);
+  }
+}
+@keyframes slide-out {
+  100% {
+      transform: translateX(100%);
+  }
+}
+@keyframes text-appearance {
+  100% {
+      color:#02070a;
+  }
+}
+
+.available{
+  margin: 0 0 30px 60px;
+}
+
+/* CARDS */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+/* Card styling */
+.card {
+  width: calc(33.33% - 20px); /* Largeur de chaque carte, ajustable en fonction de la mise en page */
+  margin-bottom: 20px; /* Espacement entre les cartes */
+  border: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card image styling */
+.card-img-top {
+  width: 290px;
+  height: 290px;
+  display: block;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+/* Card body styling */
+.card-body {
+  padding: 20px;
+  flex-grow: 1; /* Pour que le corps de la carte prenne toute la hauteur disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Répartit le contenu verticalement */
+}
+
+/* Card title styling */
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Card text styling */
+.card-text {
+  margin-bottom: 15px;
+}
+
+/* Price styling */
+.price {
+  font-weight: bold;
+}
+
+/* Button styling */
+.btn {
+  width: 40%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #2914ea;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+}
+
+.btn:hover {
+  background-color: #070707;
+  color: rgb(255, 90, 95);
+  font-weight: bold;
 }
