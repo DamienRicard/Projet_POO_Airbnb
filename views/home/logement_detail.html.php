@@ -5,7 +5,9 @@
 use Core\Session\Session; ?>
 
 <div class="card card-detail">
- <?php foreach ($logement->medias as $media) : ?>
+
+
+    <?php foreach ($logement->medias as $media) : ?>
       <img src="/assets/images/<?= $media->image_path ?>" class="card-img-top img-detail" alt="">
     <?php endforeach; ?>
 
@@ -15,7 +17,7 @@ use Core\Session\Session; ?>
     <h1> <?= $logement->title ?> </h1>
     <p><?= $logement->description ?></p>
     <p>Type de logement : <?= $logement->type_logement->label ?></p>
-    <p><span id="nightPrice"><?= $logement->price_per_night ?> </span>€ / nuit </p>
+    <p class="price">Prix : <span id="nightPrice" class="price1"><?= $logement->price_per_night ?> </span>€ / nuit </p>
     <p>Taille du logement : <?= $logement->Taille ?> m² </p>
     <p>Nombre de chambres : <?= $logement->nb_room ?> </p>
     <p>Nombre de lits : <?= $logement->nb_bed ?> </p>

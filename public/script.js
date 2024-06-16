@@ -61,3 +61,7 @@ function generateRandomNumber() {
 // Exemple d'utilisation : appeler la fonction et afficher le résultat
 let randomNumber = generateRandomNumber();
 document.getElementById('randomNumber').innerText = `${randomNumber}`;
+
+
+
+

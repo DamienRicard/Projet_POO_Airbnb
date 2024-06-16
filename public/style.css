@@ -333,9 +333,96 @@ p:nth-child(2) span::after{
   margin: 60px 20px 0 0;
 }
 
+.price {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+}
+
+.price1{
+  font-size: 17px;
+}
+
 .formulaire{
   display: flex;
   flex-direction: column;
   width: 20%;
   margin-left: 80px;
+}
+
+
+
+/* PAGE CONNEXION */
+
+.container-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  background-color: #1652b4;
+}
+
+.detail-description{
+  color:#fff;
+}
+
+.connexion-title{
+  font-size: 30px;
+  margin: 40px 0 40px 0px;
+}
+
+.form-control{
+  border: 1px solid #adb5bd;
+  margin: 20px 0;
+}
+
+.call-action{
+  padding: 10px;
+  background-color: #050506;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.call-action:hover{
+  background-color: #454549;
+  color: #21b914;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+.no-account{
+  margin-top: 20px;
+}
+
+.auth-link{
+  font-weight: bold;
+}
+
+.auth-link:hover{
+  border: 2px solid #000000;
+  border-radius: 8px;
+  color:#fff;
+  padding: 5px 10px;
+  background-color: #1652b4;
+  font-weight: normal;
+}
+
+.header-description{
+  margin-top: 20px;
 }
