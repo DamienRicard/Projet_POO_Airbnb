@@ -31,9 +31,9 @@ use Core\Session\Session; ?>
   <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
   <h2>Réservations</h2>
 
-  <label for="start_date">Start</label>
+  <label for="start_date">Date d'arrivée</label>
   <input id="start_date" type="date" name="date_start" required />
-  <label for="end_date">End</label>
+  <label for="end_date">Date de départ</label>
   <input id="end_date" type="date" name="date_end" required />
 
   <h3>Total : <span id="total" name="price_total"> </span> €</h3>

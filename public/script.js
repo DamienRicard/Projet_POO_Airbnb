@@ -51,17 +51,16 @@ function copierSpanDansHidden(){
 }
 
 
-// Fonction pour générer un nombre aléatoire entre 3 et 5 avec 1 chiffre après la virgule
-function generateRandomNumber() {
-  let random = Math.random() * 2; // Génère un nombre entre 0 et 2
-  random += 3; // Maintenant, random est entre 3 et 5
-  return random.toFixed(1); // Formate le nombre avec 1 chiffre après la virgule
+
+
+
+function getRandomInt() {
+  return Math.floor(Math.random() * 5);
 }
 
+console.log(getRandomInt());
+
 // Exemple d'utilisation : appeler la fonction et afficher le résultat
-let randomNumber = generateRandomNumber();
-document.getElementById('randomNumber').innerText = `${randomNumber}`;
-
-
-
+let randomNumber = getRandomInt()
+document.getElementById('randomNumber').value = randomNumber;
 

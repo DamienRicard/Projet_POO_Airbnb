@@ -427,6 +427,24 @@ p:nth-child(2) span::after{
   margin-top: 20px;
 }
 
+/* PAGE MES RESERVATIONS */
+
+.title-reservation{
+  width: 50%;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.card-reservation{
+  width: 20%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 20px 0;
+  margin-left: 40px;
+}
 
 /* FOOTER */
 

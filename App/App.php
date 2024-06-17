@@ -54,30 +54,30 @@ class App implements DatabaseConfigInterface
   private function registerRoutes(): void
   {
     //ON ENREGISTRE LES ROUTES ICI
-    $this->router->get('/', [HomeController::class, 'home'] );
+    $this->router->get('/', [HomeController::class, 'home']);
     //INFO: si on veut renvoyer une vue à l'utilisateur => route en "get"
     //INFO: si on veut traiter des données d'un formulaire => route en "post"
 
     // PARTIE AUTHENTIFICATION
-    $this->router->get('/inscription', [AuthController::class, 'registerForm'] );
+    $this->router->get('/inscription', [AuthController::class, 'registerForm']);
     $this->router->get('/connexion', [AuthController::class, 'loginForm']);
-    $this->router->post('/register',[AuthController::class, 'register']);
-    $this->router->post('/login',[AuthController::class, 'login']);
+    $this->router->post('/register', [AuthController::class, 'register']);
+    $this->router->post('/login', [AuthController::class, 'login']);
     $this->router->get('/logout', [AuthController::class, 'logout']);
-    
+
 
     // PARTIE UTILISATEUR
-    $this->router->get('/add_logement', [LogementController::class, 'addLogement']);
-    $this->router->post('/add_logement_form', [LogementController::class, 'addLogementForm']);
-   
     $this->router->post('/reservation_form', [UserController::class, 'addReservationForm']);
-    $this->router->post('/mes_reservations/{id}', [UserController::class, 'getReservationById']);
-    $this->router->get('/mes_reservations', [UserController::class, 'getReservationById']);
+    $this->router->get('/mes_reservations/{id}', [UserController::class, 'ReservationsByUserId']);
+    $this->router->post('/mes_logements/{id}', [UserController::class, 'addLogementForm']);
     
+
+
     //PARTIE LOGEMENTS
     $this->router->get('/', [LogementController::class, 'getLogements']);
     $this->router->get('/logement_detail/{id}', [LogementController::class, 'getLogementById']);
-
+    $this->router->get('/add_logement', [LogementController::class, 'addLogement']);
+    $this->router->post('/add_logement_form', [UserController::class, 'addLogementForm']);
   }
 
   //3. méthode qui démarre le router

@@ -46,4 +46,25 @@ class TypeLogementRepository extends Repository
 
     return new TypeLogement($result);
   }
+
+
+  public function getAllTypes()
+  {
+    $array_result = [];
+    //on crée la requete
+    $q = sprintf(
+      'SELECT *
+      FROM %s WHERE is_active=1',
+      $this->getTableName()
+    );
+    
+    $stmt = $this->pdo->query($q);
+    if (!$stmt) return $array_result;
+
+    while ($row_data = $stmt->fetch()) {
+      $type = new TypeLogement($row_data);
+      $array_result[] = $type;
+    }
+    return $array_result;
+  }
 }

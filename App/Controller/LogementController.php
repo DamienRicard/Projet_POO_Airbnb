@@ -79,18 +79,19 @@ class LogementController extends Controller
     //on instancie formResult pour stocker les messages d'erreurs
     $form_result = new FormResult();
     //on doit créer une instance de User
-    $logement = new Logement();
+   
 
     $title=$data_form['title'];
-    $pays=$data_form['pays'];
-    $ville=$data_form['ville'];
+    $pays=$data_form['country'];
+    $ville=$data_form['city'];
     $zip_code=$data_form['zip_code'];
     $size=$data_form['size'];
     $description=$data_form['description'];
     $nb_room=$data_form['nb_room'];
     $nb_bed=$data_form['nb_bed'];
+    $nb_bed=$data_form['nb_bath'];
     $nb_traveler=$data_form['nb_traveler'];
-    $price=$data_form['price'];
+    $price=$data_form['price_per_night'];
 
     //on s'occupe de toutes les vérifications
     if (

@@ -91,4 +91,24 @@ class LogementRepository extends Repository
     //je retourne l'objet Logement
     return $logement;
   }
+
+
+
+  /**
+   * methode qui permet d'insérer un logement
+   */
+  public function insertLogement(array $data)
+  {
+    $q = sprintf(
+      "INSERT INTO %s (user_id, price_per_night, nb_room, nb_bed, nb_traveler, taille, description, title, is_active, type_id, adress_id)
+        VALUES (:user_id, :price_per_night, :nb_rooms, :nb_bed, :nb_traveler, :taille, :description, :title, :is_active , :type_id, :adress_id) ",
+      $this->getTableName()
+    );
+
+    $stmt = $this->pdo->prepare($q);
+
+    if (!$stmt) return false;
+
+    $stmt->execute($data);
+  }
 }
