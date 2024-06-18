@@ -67,10 +67,14 @@ class App implements DatabaseConfigInterface
 
 
     // PARTIE UTILISATEUR
+    //route qui permet à l'utilisateur de faire une reservation via le formulaire
     $this->router->post('/reservation_form', [UserController::class, 'addReservationForm']);
-    $this->router->get('/mes_reservations/{id}', [UserController::class, 'ReservationsByUserId']);
+    //route qui redirige vers la page ou l'utilisateur peut voir ses reservations
+    $this->router->get('/mes_reservations/{id}', [UserController::class, 'myReservationsByUserId']);
+    //route qui permet à l'utilisateur de mettre son logement en location via le formulaire
     $this->router->post('/mes_logements/{id}', [UserController::class, 'addLogementForm']);
-    
+    //route qui redirige vers la page ou l'utilisateur peut voir ses logements qu'il a mis en location
+    $this->router->get('/mes_logements/{id}', [UserController::class, 'myLogementsByUserId']);
 
 
     //PARTIE LOGEMENTS

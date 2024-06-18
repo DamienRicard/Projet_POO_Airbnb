@@ -25,27 +25,25 @@ use Core\Session\Session; ?>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="city">
     </div>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Phone</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone">
+        <label for="exampleInputEmail1" class="form-label">Nom de rue</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="adress">
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Code postal</label>
         <input type="int" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="zip_code">
     </div>
     <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Téléphone</label>
+        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="phone">
+    </div>
+    <div class="mb-3">
         <label for="type" class="form-label">Type de logement</label>
-        <!--TODO: requete pour récup les types plus foreach -->
+      
         <?php foreach (AppRepoManager::getRm()->getTypeLogementRepository()->getAllTypes() as $type) : ?>
             <div>
-                <label><input type="checkbox" name="type_logement_id" value="<?= $type->id ?>"> <?= $type->label ?> </label>
+                <input type="checkbox" name="type_logement_id" value="<?= $type->id ?>"> <?= $type->label ?>
             </div>
         <?php endforeach; ?>
-
-
-
-
-
-
 
     </div>
     <div class="mb-3">
@@ -72,6 +70,7 @@ use Core\Session\Session; ?>
         <label for="exampleInputPassword1" class="form-label">Nombre de voyageurs</label>
         <input type="number" class="form-control" id="exampleInputPassword1" name="nb_traveler">
     </div>
+    
     <div class="mb-3">
 
         <h3 class="sub-title">Equipements :</h3>

@@ -6,14 +6,13 @@ use Core\Session\Session; ?>
 
 <div class="card card-detail">
 
-
+<!--$$logement vient du Controller UserController (car c'est lui qui appelle la vue home/logement_detail) et de la fonction  -->
+<!--pour $media on met le nom que l'on veut -->
     <?php foreach ($logement->medias as $media) : ?>
       <img src="/assets/images/<?= $media->image_path ?>" class="card-img-top img-detail" alt="">
     <?php endforeach; ?>
 
   <div class="card-body card-body-detail">
-
-   
     <h1> <?= $logement->title ?> </h1>
     <p><?= $logement->description ?></p>
     <p>Type de logement : <?= $logement->type_logement->label ?></p>

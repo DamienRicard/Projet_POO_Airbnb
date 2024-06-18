@@ -41,4 +41,7 @@ class EquipementRepository extends Repository
     }
       return $array_result;
   }
+
+
+  
 }

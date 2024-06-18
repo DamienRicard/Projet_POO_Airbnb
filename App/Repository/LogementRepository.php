@@ -100,8 +100,34 @@ class LogementRepository extends Repository
   public function insertLogement(array $data)
   {
     $q = sprintf(
-      "INSERT INTO %s (user_id, price_per_night, nb_room, nb_bed, nb_traveler, taille, description, title, is_active, type_id, adress_id)
-        VALUES (:user_id, :price_per_night, :nb_rooms, :nb_bed, :nb_traveler, :taille, :description, :title, :is_active , :type_id, :adress_id) ",
+      "INSERT INTO %s 
+      (
+        user_id, 
+        price_per_night, 
+        nb_room, 
+        nb_bed, 
+        nb_bath, 
+        nb_traveler, 
+        Taille, 
+        description,
+        title,
+        is_active,
+        type_logement_id,
+        adress_id)
+      VALUES (
+        :user_id, 
+        :price_per_night,
+        :nb_room,
+        :nb_bed,
+        :nb_bath,
+        :nb_traveler,
+        :Taille,
+        :description,
+        :title,
+        :is_active  ,
+        :type_logement_id,
+        :adress_id)
+      ",
       $this->getTableName()
     );
 
@@ -110,5 +136,27 @@ class LogementRepository extends Repository
     if (!$stmt) return false;
 
     $stmt->execute($data);
+
+    return $this->pdo->lastInsertId();
+  }
+
+
+  public function LogementsByUserId(int $user_id)
+  {
+
+    $q = sprintf(
+      "SELECT * FROM %s WHERE `user_id` = :user_id",
+      $this->getTableName()
+    );
+
+    $stmt = $this->pdo->prepare($q);
+    $stmt->execute(['user_id' => $user_id]);
+    $result = $stmt->fetchAll();
+    $array_result = [];
+    foreach ($result as $row_data) {
+      $logement = new Logement($row_data);
+      $array_result[] = $logement;
+    }
+    return $array_result;
   }
 }

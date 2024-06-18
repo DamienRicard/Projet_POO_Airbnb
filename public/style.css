@@ -157,9 +157,7 @@ nav ul li a {
 
 /* Index Page */
 
-.text-center{
-  margin: 100px 0px;
-}
+
 
 /* Animation text */
 .paragraphe{
@@ -456,4 +454,24 @@ p:nth-child(2) span::after{
 
 .footer{
   padding-top: 60px;
+}
+
+/* MES LOGEMENTS */
+
+.card-logements{
+  border: 2px solid #000000;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px;
+  gap:20px;
+  
+}
+
+.each-logement{
+  height: auto;
+  
+  border: 2px solid rgb(98, 169, 190);
+  border-radius: 8px;
+  margin: 20px;
 }

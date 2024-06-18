@@ -11,4 +11,6 @@ class User extends Model
   public string $firstname;
   public bool $is_active;
   public ?int $adress_id;
+
+  public Adress $adress;
 }

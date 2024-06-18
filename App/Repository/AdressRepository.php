@@ -17,8 +17,8 @@ class AdressRepository extends Repository
     {
       //on crée la requete SQL
       $q = sprintf(
-        'INSERT INTO `%s` (`adress`, `country`, `zip_code`, `phone`)
-        VALUES (:adress, :country, :zip_code  , :phone)',
+        'INSERT INTO `%s` (`adress`, `country`, `zip_code`, `phone`, `city`)
+        VALUES (:adress, :country, :zip_code  , :phone, :city)',
         $this->getTableName()
       );
   
