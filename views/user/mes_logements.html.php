@@ -1,4 +1,4 @@
-<h4 class="text-center m-5">Mes logements</h4>
+<h4 class="text-center m-5">Mes logements disponibles à la location</h4>
 
 <div class="card-logements">
   <!--$meslogements vient du Controller UserController (car c'est lui qui appelle la vue user/mes_logements) et de la fonction LogementsByUserId -->

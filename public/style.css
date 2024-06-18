@@ -475,3 +475,21 @@ p:nth-child(2) span::after{
   border-radius: 8px;
   margin: 20px;
 }
+
+
+/* PAGE ADD LOGEMENT */
+
+.type-logement{
+  margin: 10px 0 ;
+}
+
+.btn-send{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.add-photos{
+  margin: 50px 0;
+  
+}

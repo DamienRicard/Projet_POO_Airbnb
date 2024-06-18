@@ -69,8 +69,8 @@ class UserController extends Controller
         $data_form = $request->getParsedBody();
         $form_result = new FormResult;
 
-
-        // on récup les données du formulaire, on stocke les inputs dans $price, $start...
+var_dump($_FILES);die;
+        // on récup les données du formulaire, on stocke les inputs dans $adress $zipCode...
         $adress = $data_form['adress'] ?? '';
         $zipCode = $data_form['zip_code'] ?? '';
         $city = $data_form['city'] ?? '';
@@ -87,8 +87,10 @@ class UserController extends Controller
         $user_id = $data_form['user_id'] ?? 0;
         $size = $data_form['size'] ?? 0;
         $equipements = $data_form['equipements']; //récupère tous les équipements envoyés par le formulaire
-       
-        // on recrée un tableau, 'nom_colonne_table' => $nom_donné_dans_tableau_au_dessus
+        
+
+
+        // on recrée un tableau, 'nom_colonne_denotreTable' => $nom_donné_dans_tableau_au_dessus
         // données envoyées dans la table Adresse de la BDD
         $adress_data = [
             'adress' => $adress,
@@ -129,6 +131,26 @@ class UserController extends Controller
             
             AppRepoManager::getRm()->getLogementEquipementRepository()->addEquipementByLogementEquipement($equipement_data);
            
+//voir Papa pizza
+//deplacer fichier tmp_name (serveur tempraire) vers dossier public/assets/images et si renvoie true : je recrée un tableau avec les infos qu'il me faut pour l'inserer dans la BDD
+            //if ()
+            // $media =[
+            //    'image_path' => $image_path,
+            //    'logement_id' => $logement_id
+            // ];
+
+          //  AppRepoManager::getRm()->getMediaRepository()->getMedia($media);
+            
+
+
+
+
+
+
+
+
+
+
         }
       
 
