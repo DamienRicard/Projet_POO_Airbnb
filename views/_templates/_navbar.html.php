@@ -12,7 +12,7 @@
         <nav class="navbar">
           <ul class="d-flex justify-content-center">
             <li ><a href="/">Accueil</a></li>
-            <li ><a href="/add_logement">Mettre mon logement sur Airbnb</a></li>
+           
           </ul>
         </nav>
       </div>
@@ -31,6 +31,7 @@
                     <li><a class="dropdown-item custom-link" href="#">Mon profil</a></li>
                     <li><a class="dropdown-item custom-link" href="/mes_reservations/<?= Session::get(Session::USER)->id ?> ">Mes réservations</a></li>
                     <li><a class="dropdown-item custom-link" href="/mes_logements/<?= Session::get(Session::USER)->id ?> ">Mes logements en location</a></li>
+                     <li ><a href="/add_logement">Louer mon bien</a></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>

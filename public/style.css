@@ -158,90 +158,42 @@ nav ul li a {
 /* Index Page */
 
 
-
-/* Animation text */
-.paragraphe{
-  font-weight: 200;
-  text-transform: uppercase;
-  color: #0a0b0a;
-  /*color:transparent;*/
-  font-size: 0px;
-  text-shadow: 5px 5px 5px rgb(215, 208, 208);
-  margin-bottom: 40px;
+.accueil {
+  margin: 50px auto; /* Centre horizontalement et ajoute une marge en haut et en bas */
+  padding: 20px;
+  text-align: center;
+}
+.accueil .titre-principal {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40;
+}
+.accueil p {
+  margin-bottom: 30px;
+}
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+.available {
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
-p span{
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  font-size: clamp(10px, 8vw, 30px);
-  
-}
-
-.paragraphe span::after{
-  content: "";
-  display: block;
-  position:absolute;
-  width: 100%;
-  height: 100%;
-  top:0;
-  left: 0;
-  transform: translateX(-100%);
-  background: crimson;
-}
-
-p:nth-child(1){     /*énième enfant de p, en l'occurance le 1er*/
-  font-weight: 300;
-  animation: txt-appearance 0s 1s forwards;
-}
-
-p:nth-child(2){     /*énième enfant de p, en l'occurance le deuxième*/
-  animation: txt-appearance 0s 1.25s forwards;
-}
-
-p:nth-child(1) span::after{
-  background: rgb(235, 0, 27);
-  animation: slide-in 0.75s ease-out forwards,
-  slide-out 0.75s 1s ease-out forwards;
-}
-p:nth-child(2) span::after{
-  background: rgb(235, 247, 4);
-  animation: slide-in 0.75s 0.3s ease-out forwards, /*délais de 0.3s, cette animation partira de 0.3s après l'autre*/
-  slide-out 0.75s 1.3s ease-out forwards;
-}
-
-@keyframes slide-in {
-  100% {
-      transform: translateX(0%);
-  }
-}
-@keyframes slide-out {
-  100% {
-      transform: translateX(100%);
-  }
-}
-@keyframes text-appearance {
-  100% {
-      color:#02070a;
-  }
-}
-
-.available{
-  margin: 0 0 30px 60px;
-}
 
 /* CARDS */
 
 .container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 
 /* Card styling */
 .card {
-  width: calc(33.33% - 20px); /* Largeur de chaque carte, ajustable en fonction de la mise en page */
+  
   margin-bottom: 20px; /* Espacement entre les cartes */
   border: none;
   overflow: hidden;

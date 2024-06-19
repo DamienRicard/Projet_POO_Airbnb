@@ -13,12 +13,18 @@ use Laminas\Diactoros\ServerRequest;
 
 class UserController extends Controller
 {
+
+
     /**
      * methode qui récupère les données du formulaire et les envoie dans la BDD
      * @param ServerRequest $request
      */
     public function addReservationForm(ServerRequest $request)
     {
+        //Elle récupère les données du formulaire à l'aide de $request->getParsedBody().
+        //Les données sont validées et préparées pour être insérées dans la base de données.
+        //Après l'insertion de la réservation, l'utilisateur est redirigé vers sa liste de
+        // réservations avec self::redirect('/mes_reservations/' . $user).
         $data_form = $request->getParsedBody();
         $result = new FormResult;
 
@@ -44,7 +50,11 @@ class UserController extends Controller
     }
 
 
-
+    /**
+     * Cette méthode récupère les réservations d'un utilisateur spécifique et les transmet à la vue home/mes_reservations. Voici ce qu'elle fait :
+     *Elle utilise AppRepoManager pour accéder au repository des réservations et récupérer les réservations par l'ID de l'utilisateur à partir de la session.
+     *Les données sont passées à la vue à travers $view_data.
+     */
     public function myReservationsByUserId()
     {
         //le controleur doit récupérer le tableau de réservations via le repository, pour le donner à la vue
@@ -59,7 +69,23 @@ class UserController extends Controller
 
 
 
+    //Cette méthode est destinée à traiter les données soumises via le formulaire d'ajout de logement.
+    //Elle récupère les données du formulaire à l'aide de $request->getParsedBody().
+    //Un objet FormResult est instancié pour stocker les erreurs éventuelles lors de la validation des données.
+    //Les données du formulaire sont ensuite validées et vérifiées :
+    //Les champs obligatoires sont vérifiés (empty()).
+    //Si des erreurs sont détectées, elles sont ajoutées à l'objet FormResult, puis l'utilisateur est redirigé vers le formulaire d'ajout avec les erreurs affichées.
+    //Si la validation réussit (aucune erreur détectée), il reste à implémenter la logique pour ajouter le logement dans la base de données. Actuellement, une redirection avec un message de succès est simulée après la soumission réussie du formulaire.
+
     /**
+     * La méthode addLogementForm gère l'ajout d'un logement avec toutes les vérifications nécessaires, y compris le téléchargement d'une image associée au logement.
+     *  Voici les points importants :
+     *Elle récupère les données du formulaire avec $request->getParsedBody() et l'image avec $_FILES.
+     *Les données du formulaire sont validées et préparées pour l'insertion.
+     *L'image est téléchargée dans le répertoire public/assets/images/ avec un nom de fichier unique généré par uniqid().
+     *Les données sont insérées dans la base de données via les repositories appropriés (LogementRepository, AdresseRepository, MediaRepository).
+     *En cas d'erreur lors de l'insertion, des messages d'erreur sont ajoutés à FormResult.
+     *Après l'ajout réussi du logement, l'utilisateur est redirigé vers sa liste de logements avec self::redirect('mes_logements/' . $user_id).
      * methode qui permet d'ajouter un logement via les données du formulaire et les envoie dans la BDD
      * @param ServerRequest $request
      * @return void
@@ -93,7 +119,7 @@ class UserController extends Controller
         $tmp_path = $file_data['tmp_name'] ?? '';
         //la ou je veux envoyer la photo
         $public_path = 'public/assets/images/';
-        var_dump($data_form);
+        
         // validation du format de l'image
         if (!in_array($file_data['type'] ?? '', ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])) {
             $form_result->addError(new FormError('Le format de l\'image n\'est pas valide'));
@@ -165,9 +191,9 @@ class UserController extends Controller
                                 'logement_id' => $logement_id,
                                 'equipement_id' => $equipement
                             ];
-                            
+
                             $equipement = AppRepoManager::getRm()->getLogementEquipementRepository()->addEquipementByLogementEquipement($equipement_data);
-                            
+
                             if (!$equipement) {
                                 $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion des equipements'));
                             }
@@ -209,7 +235,11 @@ class UserController extends Controller
     }
 
 
-
+    /**
+     * Cette méthode récupère les logements d'un utilisateur spécifique et les transmet à la vue user/mes_logements. Voici ce qu'elle fait :
+     * Elle utilise AppRepoManager pour accéder au repository des logements et récupérer les logements par l'ID de l'utilisateur à partir de la session.
+     * Les données sont passées à la vue à travers $view_data.
+     */
     public function myLogementsByUserId()
     {
         //le controleur doit récupérer le tableau de logements via le repository, pour le donner à la vue

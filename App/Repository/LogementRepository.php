@@ -8,156 +8,184 @@ use Core\Repository\Repository;
 
 class LogementRepository extends Repository
 {
-  public function getTableName(): string
-  {
-    return 'logement'; //retourne le nom de la table
-  }
-
-
-  /**
-   * methode qui récupère tous les logements
-   * @return array
-   */
-  public function getAllLogements(): array
-  {
-    //on déclare un tableau vide
-    $array_result = [];
-
-    //on crée la requête sql
-    //1$ et 2$ pour indiquer que c'est une jointure, 2 tables différentes. Avec sprintf on est obligé d'utiliser le %1$s (et %2$s si 2 tables)
-    $query = sprintf(
-      'SELECT l.id, l.title, l.price_per_night, l.taille, m.image_path
-      FROM %1$s AS l
-      INNER JOIN %2$s AS m ON l.`id` = m.`logement_id`
-      WHERE l.`is_active` = 1 ;
-      ',
-      $this->getTableName(),  //correspond au %1$s
-      //appRepoManager renvoie au fichier AppRepoManager.php
-      AppRepoManager::getRm()->getMediaRepository()->getTableName()
-        //correspond au %2$s
-    );
-
-    //on peut directement executer la requête
-    $stmt = $this->pdo->query($query);
-    //on vérifei que la requête est bien exécutée
-    if (!$stmt) return $array_result;
-    //on récupère les données que l'on met dans notre tableau
-    while ($row_data = $stmt->fetch()) {
-      //à chaque passage de la boucle on instancie un objet Logement, à chaque passage de la boucle on met les données dans le tableau
-      $logement = new Logement($row_data);
-      $logement->medias[] = $row_data['image_path'];
-      $array_result[] = $logement;
+    // Méthode pour retourner le nom de la table associée à ce repository
+    public function getTableName(): string
+    {
+        return 'logement'; // Retourne le nom de la table
     }
-    return $array_result;
-  }
 
+    /**
+     * Méthode qui récupère tous les logements actifs avec leurs médias associés
+     * @return array - Tableau d'objets Logement
+     */
+    public function getAllLogements(): array
+    {
+        $array_result = []; // Déclaration d'un tableau vide pour stocker les logements récupérés
 
+        // Requête SQL pour récupérer les logements actifs avec leurs images associées
+        $query = sprintf(
+            'SELECT l.id, l.title, l.price_per_night, l.taille, m.image_path
+            FROM %1$s AS l
+            INNER JOIN %2$s AS m ON l.`id` = m.`logement_id`
+            WHERE l.`is_active` = 1',
+            $this->getTableName(), // Nom de la table des logements
+            AppRepoManager::getRm()->getMediaRepository()->getTableName() // Nom de la table des médias récupéré via le gestionnaire de repository
+        );
 
-  /**
-   * methode qui permet de récupérer un logement grâce à son id
-   * @param int $logement_id
-   * @return ?Logement
-   */
-  public function getLogementById(int $logement_id): ?Logement
-  {
-    //on crée la requête sql
-    $q = sprintf(
-      'SELECT * FROM %s WHERE `id` = :id', //le :id est comme un espace réservé pour une valeur que l'on va fournir ultérieurement.
-      $this->getTableName()
-    );
+        // Exécution de la requête SQL
+        $stmt = $this->pdo->query($query);
 
-    //on prépare la requête
-    $stmt = $this->pdo->prepare($q);
-    //on verifie que la requête est bien préparée
-    if (!$stmt) return null;
+        // Vérification si la requête a réussi
+        if (!$stmt) {
+            return $array_result; // Retourne le tableau vide si la requête a échoué
+        }
 
-    //on execute en passant les paramètres
-    $stmt->execute(['id' => $logement_id]); // id car :id est dans la requête
+        // Boucle sur les résultats de la requête pour créer des objets Logement et les ajouter au tableau $array_result
+        while ($row_data = $stmt->fetch()) {
+            $logement = new Logement($row_data); // Création d'un nouvel objet Logement avec les données récupérées
+            $logement->medias[] = $row_data['image_path']; // Ajout du chemin de l'image au tableau medias de l'objet Logement
+            $array_result[] = $logement; // Ajout de l'objet Logement au tableau $array_result
+        }
 
-    //on récupère le résultat dans un tableau associatif
-    $result = $stmt->fetch();
-
-    //si je n'ai pas de résultat je retourne null
-    if (!$result) return null;
-
-    //si j'ai un résultat j'instancie un objet Logement
-    $logement = new Logement($result);
-
-    //on va hydrater le type du logement dans l'objet Logement. ($logement->"type_logement_id" car c'est sur cette propriété que les 2tables sont liées)
-    $logement->type_logement = AppRepoManager::getRm()->getTypeLogementRepository()->getTypeLogementByLogementId($logement->type_logement_id);
-
-    //on va hydrater le type du logement dans l'objet Logement. ($logement->"type_logement_id" car c'est sur cette propriété que les 2tables sont liées)
-    $logement->medias = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement_id);
-
-    //je retourne l'objet Logement
-    return $logement;
-  }
-
-
-
-  /**
-   * methode qui permet d'insérer un logement
-   */
-  public function insertLogement(array $data)
-  {
-    $q = sprintf(
-      "INSERT INTO %s 
-      (
-        user_id, 
-        price_per_night, 
-        nb_room, 
-        nb_bed, 
-        nb_bath, 
-        nb_traveler, 
-        Taille, 
-        description,
-        title,
-        is_active,
-        type_logement_id,
-        adress_id)
-      VALUES (
-        :user_id, 
-        :price_per_night,
-        :nb_room,
-        :nb_bed,
-        :nb_bath,
-        :nb_traveler,
-        :Taille,
-        :description,
-        :title,
-        :is_active,
-        :type_logement_id,
-        :adress_id)
-      ",
-      $this->getTableName()
-    );
-
-    $stmt = $this->pdo->prepare($q);
-
-    if (!$stmt) return false;
-
-    $stmt->execute($data);
-
-    return $this->pdo->lastInsertId();
-  }
-
-
-  public function LogementsByUserId(int $user_id)
-  {
-
-    $q = sprintf(
-      "SELECT * FROM %s WHERE `user_id` = :user_id",
-      $this->getTableName()
-    );
-
-    $stmt = $this->pdo->prepare($q);
-    $stmt->execute(['user_id' => $user_id]);
-    $result = $stmt->fetchAll();
-    $array_result = [];
-    foreach ($result as $row_data) {
-      $logement = new Logement($row_data);
-      $array_result[] = $logement;
+        return $array_result; // Retourne le tableau de logements avec médias associés
     }
-    return $array_result;
-  }
+
+    /**
+     * Cette méthode récupère un logement spécifique par son ID
+     *  avec tous ses détails (y compris le type de logement et les médias associés).
+     * Méthode qui récupère un logement par son ID avec ses détails complets (type, médias)
+     * @param int $logement_id - ID du logement à récupérer
+     * @return ?Logement - Objet Logement ou null si aucun logement trouvé
+     */
+    public function getLogementById(int $logement_id): ?Logement
+    {
+        // Requête SQL pour récupérer un logement par son ID
+        $q = sprintf(
+            'SELECT * FROM %s WHERE `id` = :id', // Requête avec un paramètre :id pour l'ID du logement
+            $this->getTableName() // Nom de la table des logements
+        );
+
+        // Préparation de la requête SQL
+        $stmt = $this->pdo->prepare($q);
+
+        // Vérification si la préparation de la requête a échoué
+        if (!$stmt) {
+            return null; // Retourne null si la préparation de la requête a échoué
+        }
+
+        // Exécution de la requête SQL en passant l'ID du logement comme paramètre
+        $stmt->execute(['id' => $logement_id]);
+
+        // Récupération du résultat de la requête sous forme de tableau associatif
+        $result = $stmt->fetch();
+
+        // Vérification si aucun résultat n'a été trouvé
+        if (!$result) {
+            return null; // Retourne null si aucun résultat trouvé pour cet ID
+        }
+
+        // Création d'un objet Logement à partir des données récupérées
+        $logement = new Logement($result);
+
+        // Hydratation du type de logement dans l'objet Logement en utilisant son ID de type de logement
+        $logement->type_logement = AppRepoManager::getRm()->getTypeLogementRepository()->getTypeLogementByLogementId($logement->type_logement_id);
+
+        // Récupération des médias associés à ce logement et assignation au tableau medias de l'objet Logement
+        $logement->medias = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement_id);
+
+        // Retourne l'objet Logement complet avec type de logement et médias
+        return $logement;
+    }
+
+    /**
+     * Cette méthode insère un nouveau logement dans la base de données en utilisant les données fournies dans le tableau $data.
+     * Méthode pour insérer un nouveau logement dans la base de données
+     * @param array $data - Données du logement à insérer
+     * @return mixed - ID du nouveau logement inséré ou false si l'insertion a échoué
+     */
+    public function insertLogement(array $data)
+    {
+        // Requête SQL pour insérer un nouveau logement avec les champs requis
+        $q = sprintf(
+            "INSERT INTO %s 
+            (
+                user_id, 
+                price_per_night, 
+                nb_room, 
+                nb_bed, 
+                nb_bath, 
+                nb_traveler, 
+                Taille, 
+                description,
+                title,
+                is_active,
+                type_logement_id,
+                adress_id)
+            VALUES (
+                :user_id, 
+                :price_per_night,
+                :nb_room,
+                :nb_bed,
+                :nb_bath,
+                :nb_traveler,
+                :Taille,
+                :description,
+                :title,
+                :is_active,
+                :type_logement_id,
+                :adress_id)
+            ",
+            $this->getTableName() // Nom de la table des logements
+        );
+
+        // Préparation de la requête SQL
+        $stmt = $this->pdo->prepare($q);
+
+        // Vérification si la préparation de la requête a échoué
+        if (!$stmt) {
+            return false; // Retourne false si la préparation de la requête a échoué
+        }
+
+        // Exécution de la requête SQL en passant les données à insérer comme paramètres
+        $stmt->execute($data);
+
+        // Retourne l'ID du dernier logement inséré dans la base de données
+        return $this->pdo->lastInsertId();
+    }
+
+
+
+    /**
+     * Méthode pour récupérer tous les logements d'un utilisateur par son ID
+     * @param int $user_id - ID de l'utilisateur dont on veut récupérer les logements
+     * @return array - Tableau d'objets Logement associés à l'utilisateur
+     */
+    public function LogementsByUserId(int $user_id)
+    {
+        // Requête SQL pour récupérer tous les logements d'un utilisateur par son ID
+        $q = sprintf(
+            "SELECT * FROM %s WHERE `user_id` = :user_id",
+            $this->getTableName() // Nom de la table des logements
+        );
+
+        // Préparation de la requête SQL
+        $stmt = $this->pdo->prepare($q);
+
+        // Exécution de la requête SQL en passant l'ID de l'utilisateur comme paramètre
+        $stmt->execute(['user_id' => $user_id]);
+
+        // Récupération de tous les résultats de la requête sous forme de tableau
+        $result = $stmt->fetchAll();
+
+        $array_result = []; // Déclaration d'un tableau vide pour stocker les logements récupérés
+
+        // Boucle sur les résultats pour créer des objets Logement et les ajouter au tableau $array_result
+        foreach ($result as $row_data) {
+            $logement = new Logement($row_data); // Création d'un nouvel objet Logement avec les données récupérées
+            $array_result[] = $logement; // Ajout de l'objet Logement au tableau $array_result
+        }
+
+        return $array_result; // Retourne le tableau de logements associés à l'utilisateur
+    }
 }
+
