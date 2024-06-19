@@ -32,7 +32,7 @@ class UserRepository extends Repository
         // Fusion des données fournies avec les valeurs par défaut
         $data = array_merge($data, $data_more);
 
-        // Requête SQL pour insérer un nouvel utilisateur
+        // Requête SQL pour insérer un nouvel utilisateur (chaque fois qu'il y a des paramètres dynamiques!)
         $query = sprintf(
             'INSERT INTO %s (`email`, `password`, `firstname`, `lastname`, `is_active`) 
             VALUES (:email, :password, :firstname, :lastname, :is_active)',

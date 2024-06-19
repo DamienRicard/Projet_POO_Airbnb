@@ -43,7 +43,7 @@ class AuthController extends Controller
     }
 
     /**
-     * register(ServerRequest $request) : Traite le formulaire d'inscription. Il valide les champs du formulaire (email, mot de passe, confirmation de mot de passe, nom et prénom), vérifie les erreurs potentielles
+     * Traite le formulaire d'inscription. Il valide les champs du formulaire (email, mot de passe, confirmation de mot de passe, nom et prénom), vérifie les erreurs potentielles
      * (champs vides, mots de passe non identiques, email invalide, etc.), puis ajoute l'utilisateur en base de données via AppRepoManager.
      * Méthode qui permet de traiter le formulaire d'enregistrement.
      */

@@ -58,9 +58,9 @@ class App implements DatabaseConfigInterface
   private function registerRoutes(): void
   {
     // ON ENREGISTRE LES ROUTES ICI
-    $this->router->get('/', [HomeController::class, 'home']);
     // INFO: si on veut renvoyer une vue à l'utilisateur => route en "get"
     // INFO: si on veut traiter des données d'un formulaire => route en "post"
+    $this->router->get('/', [HomeController::class, 'home']);
 
     // PARTIE AUTHENTIFICATION
     $this->router->get('/inscription', [AuthController::class, 'registerForm']);

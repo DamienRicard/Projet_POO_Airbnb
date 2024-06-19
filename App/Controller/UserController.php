@@ -86,13 +86,13 @@ class UserController extends Controller
      *Les données sont insérées dans la base de données via les repositories appropriés (LogementRepository, AdresseRepository, MediaRepository).
      *En cas d'erreur lors de l'insertion, des messages d'erreur sont ajoutés à FormResult.
      *Après l'ajout réussi du logement, l'utilisateur est redirigé vers sa liste de logements avec self::redirect('mes_logements/' . $user_id).
-     * methode qui permet d'ajouter un logement via les données du formulaire et les envoie dans la BDD
+     * addLogementForm = methode qui permet d'ajouter un logement via les données du formulaire et les envoie dans la BDD
      * @param ServerRequest $request
      * @return void
      */
     public function addLogementForm(ServerRequest $request): void
     {
-        $data_form = $request->getParsedBody();
+        $data_form = $request->getParsedBody(); //récupère les données du formulaire
         $form_result = new FormResult;
         $file_data = $_FILES['photos']; // ['photos'] = input du formulaire
 
@@ -115,7 +115,7 @@ class UserController extends Controller
         $size = $data_form['size'] ?? 0;
         $equipements = $data_form['equipements']; //récupère tous les équipements envoyés par le formulaire
         //variables pour gérer la photo
-        $image_name = $file_data['name'] ?? '';
+        $image_name = $file_data['name'] ?? ''; // d'ou sort ce ['name'] ??????? c'est pas l'input du formulaire . c'est le nom du fichier ?????
         $tmp_path = $file_data['tmp_name'] ?? '';
         //la ou je veux envoyer la photo
         $public_path = 'public/assets/images/';
@@ -148,9 +148,9 @@ class UserController extends Controller
             $slug = explode('.', strtolower(str_replace(' ', '-', $filename)))[0];
             $imgPathPublic = PATH_ROOT . $public_path . $filename;
             // déplacement du fichier temporaire vers son dossier de destination
-            if (move_uploaded_file($tmp_path, $imgPathPublic)) { //source /destination
+            if (move_uploaded_file($tmp_path, $imgPathPublic)) { //$tmp_path = source et $imgPathPublic = destination
                 // appel du repository pour insérer dans la BDD
-                // on recrée un tableau, 'nom_colonne_denotreTable' => $nom_donné_dans_tableau_au_dessus
+                // on recrée un tableau, 'nom_colonne_denotreTable_dans_BDD(clés)' => $nom_donné_dans_tableau_au_dessus (valeurs)
                 // données envoyées dans la table Adresse de la BDD
                 $adress_data = [
                     'adress' => $adress,
@@ -164,8 +164,8 @@ class UserController extends Controller
                 if (!$adress_id) {
                     $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion de l\'adresse'));
                 } else {
-                    // données envoyées dans la table Adresse de la BDD
-                    //il faut que les clés (à gauche)correspondent exactement aux nom de la bdd, sinon elles ne sont pas prises en compte
+                    // données envoyées dans la table Logement de la BDD
+                    //il faut que les clés (à gauche) correspondent exactement aux noms de la bdd, sinon elles ne sont pas prises en compte
                     $logement_data = [
                         'title' => $title,
                         'description' => $description,
@@ -185,6 +185,7 @@ class UserController extends Controller
                     if (!$logement_id) {
                         $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion du logement'));
                     } else {
+                        //on re découpe le tableau des equipements envoyés par le formulaire en plusieurs lignes
                         foreach ($equipements as $equipement) {
 
                             $equipement_data = [
