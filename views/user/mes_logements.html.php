@@ -2,7 +2,7 @@
 
 <div class="card-logements">
   <!--$meslogements vient du Controller UserController (car c'est lui qui appelle la vue user/mes_logements) et de la fonction LogementsByUserId -->
-  <!--pour $meslogement on met le nom que l'on veut -->
+  <!--pour $logements on met le nom que l'on veut -->
   <?php foreach ($meslogements as $logements) : ?>
     <div >
       <div class="each-logement">
@@ -13,6 +13,7 @@
         <p> Nombre de lits : <?= $logements->nb_bed ?></p>
         <p> Nombre de salles de bain : <?= $logements->nb_bath ?></p>
         <p> Nombre de voyageurs maximum : <?= $logements->nb_traveler ?></p>
+        
 
       </div>
     </div>

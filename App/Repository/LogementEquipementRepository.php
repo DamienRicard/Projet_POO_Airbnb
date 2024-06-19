@@ -21,23 +21,22 @@ class LogementEquipementRepository extends Repository
   public function addEquipementByLogementEquipement(array $data)
   {
     $q = sprintf(
-      "INSERT INTO %s 
-      (
-        logement_id,
-        equipement_id
-      )VALUES (
-        :logement_id,
-        :equipement_id
-      )
-      ",
+      "INSERT INTO %s (logement_id, equipement_id) 
+      VALUES (:logement_id, :equipement_id)",
       $this->getTableName()
     );
 
+    //on prépare la requete
     $stmt = $this->pdo->prepare($q);
 
-    if (!$stmt) return false;
+    //on vérifie si la requete s'est bien préparée
+    if(!$stmt) return false;
 
+    //on execute la requete en bindant les paramètres
     $stmt->execute($data);
+
+    //on regarde si au moins une ligne a été enregistrée
+    return $stmt->rowCount() > 0;
     
   
   }

@@ -33,7 +33,8 @@ class LogementRepository extends Repository
       ',
       $this->getTableName(),  //correspond au %1$s
       //appRepoManager renvoie au fichier AppRepoManager.php
-      AppRepoManager::getRm()->getMediaRepository()->getTableName()  //correspond au %2$s
+      AppRepoManager::getRm()->getMediaRepository()->getTableName()
+        //correspond au %2$s
     );
 
     //on peut directement executer la requête
@@ -124,7 +125,7 @@ class LogementRepository extends Repository
         :Taille,
         :description,
         :title,
-        :is_active  ,
+        :is_active,
         :type_logement_id,
         :adress_id)
       ",

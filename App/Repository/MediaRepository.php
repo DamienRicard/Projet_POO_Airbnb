@@ -48,4 +48,24 @@ class MediaRepository extends Repository
     //on retourne le tableau fraichement rempli
     return $array_result;
   }
+
+  public function insertMedia ($media)
+  {
+
+    //on crée notre requête sql
+    $q = sprintf(
+      'INSERT INTO %s (`logement_id`, `image_path`) 
+      VALUES (:logement_id, :image_path)',
+      $this->getTableName()
+    );
+
+    //on prépare la requête dés qu'il y a ":quelquechose" car il faut envoyer des parametres
+    $stmt = $this->pdo->prepare($q);
+
+    //on verifie que la requête est bien préparée
+    if (!$stmt) return false;
+
+    //on execute en passant les paramètres
+    return $stmt->execute($media);
+  }
 }

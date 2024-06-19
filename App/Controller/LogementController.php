@@ -66,8 +66,13 @@ class LogementController extends Controller
 
   public function addLogement()
   {
+    $view_data = [
+      'form_result' => Session::get(Session::FORM_RESULT),
+      'form_success' => Session::get(Session::FORM_SUCCESS),
+    ];
+    
       $view = new View('home/add_logement');
-      $view->render();
+      $view->render($view_data);
   }
 
   

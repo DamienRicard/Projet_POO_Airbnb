@@ -6,6 +6,7 @@ use Core\Session\Session; ?>
 
 <div class="container mt-5">
     <h2 class="text-center mb-4">Ajouter un logement à la location</h2>
+    <?php include PATH_ROOT . '/views/_templates/_message.html.php' ?>
     <form action="/add_logement_form" method="post" enctype="multipart/form-data">
         <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
 
@@ -38,6 +39,10 @@ use Core\Session\Session; ?>
 
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="title">titre</label>
+                    <input class="form-control form-control-custom" id="title" name="title" rows="3" required></input>
+                </div>
+                <div class="form-group">
                     <label for="description">Description</label>
                     <input class="form-control form-control-custom" id="description" name="description" rows="3" required></input>
                 </div>
@@ -69,8 +74,8 @@ use Core\Session\Session; ?>
             <div>
                 <?php foreach (AppRepoManager::getRm()->getTypeLogementRepository()->getAllTypes() as $type) : ?>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="type_logement_id_<?= $type->id ?>" name="type_logement_id[]" value="<?= $type->id ?>">
-                        <label class="form-check-label" for="type_logement_id_<?= $type->id ?>"><?= $type->label ?></label>
+                        <input class="form-check-input" type="radio"  name="type_logement_id" value="<?= $type->id ?>">
+                        <label class="form-check-label" ><?= $type->label ?></label>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -88,7 +93,7 @@ use Core\Session\Session; ?>
                         <h5><?= ucfirst($label) ?></h5>
                         <?php foreach ($equipements as $equipement) : ?>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="equipement_<?= $equipement->id ?>" name="equipements[]" value="<?= $equipement->id ?>">
+                                <input class="form-check-input" type="checkbox"  name="equipements[]" value="<?= $equipement->id ?>">
                                 <label class="form-check-label" for="equipement_<?= $equipement->id ?>">
                                     <img src="/assets/icons/icons/<?= $equipement->image_path ?>" alt="<?= $equipement->label ?>" style="width: 24px; height: 24px; margin-right: 8px;">
                                     <?= $equipement->label ?>

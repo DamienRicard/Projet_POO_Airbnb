@@ -68,8 +68,9 @@ class UserController extends Controller
     {
         $data_form = $request->getParsedBody();
         $form_result = new FormResult;
+        $file_data = $_FILES['photos']; // ['photos'] = input du formulaire
 
-var_dump($_FILES);die;
+
         // on récup les données du formulaire, on stocke les inputs dans $adress $zipCode...
         $adress = $data_form['adress'] ?? '';
         $zipCode = $data_form['zip_code'] ?? '';
@@ -87,95 +88,124 @@ var_dump($_FILES);die;
         $user_id = $data_form['user_id'] ?? 0;
         $size = $data_form['size'] ?? 0;
         $equipements = $data_form['equipements']; //récupère tous les équipements envoyés par le formulaire
-        
+        //variables pour gérer la photo
+        $image_name = $file_data['name'] ?? '';
+        $tmp_path = $file_data['tmp_name'] ?? '';
+        //la ou je veux envoyer la photo
+        $public_path = 'public/assets/images/';
+        var_dump($data_form);
+        // validation du format de l'image
+        if (!in_array($file_data['type'] ?? '', ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])) {
+            $form_result->addError(new FormError('Le format de l\'image n\'est pas valide'));
+        } elseif (
+            empty($user_id) ||
+            empty($size) ||
+            empty($country) ||
+            empty($city) ||
+            empty($adress) ||
+            empty($zipCode) ||
+            empty($phone) ||
+            empty($description) ||
+            empty($nb_room) ||
+            empty($nb_bed) ||
+            empty($nb_bath) ||
+            empty($nb_traveler) ||
+            empty($price) ||
+            empty($title) ||
+            empty($equipements)
+        ) {
 
-
-        // on recrée un tableau, 'nom_colonne_denotreTable' => $nom_donné_dans_tableau_au_dessus
-        // données envoyées dans la table Adresse de la BDD
-        $adress_data = [
-            'adress' => $adress,
-            'zip_code' => $zipCode,
-            'city' => $city,
-            'country' => $country,
-            'phone' => $phone
-        ];
-        //on stocke l'id de la ligne de l'adresse qu'on vient d'insérer
-        $adress_id = AppRepoManager::getRm()->getAdressRepository()->insertAdress($adress_data); // recupère le last ID qui a été crée
-
-        // données envoyées dans la table Adresse de la BDD
-        //il faut que les clés (à gauche)correspondent exactement aux nom de la bdd, sinon elles ne sont pas prises en compte
-        $logement_data = [
-            'title' => $title,
-            'description' => $description,
-            'price_per_night' => $price,
-            'nb_room' => $nb_room,
-            'nb_bed' => $nb_bed,
-            'nb_bath' => $nb_bath,
-            'nb_traveler' => $nb_traveler,
-            'is_active' => 1,
-            'type_logement_id' => $type,
-            'user_id' => $user_id,
-            'adress_id' => intval($adress_id),
-            'Taille' => $size,
-        ];
-        $logement_id = AppRepoManager::getRm()->getLogementRepository()->insertLogement($logement_data);
-
-
-        // 
-        foreach($equipements as $equipement) {
-            
-            $equipement_data = [
-                'logement_id' => $logement_id,
-                'equipement_id' => $equipement
-            ];
-            
-            AppRepoManager::getRm()->getLogementEquipementRepository()->addEquipementByLogementEquipement($equipement_data);
-           
-//voir Papa pizza
-//deplacer fichier tmp_name (serveur tempraire) vers dossier public/assets/images et si renvoie true : je recrée un tableau avec les infos qu'il me faut pour l'inserer dans la BDD
-            //if ()
-            // $media =[
-            //    'image_path' => $image_path,
-            //    'logement_id' => $logement_id
-            // ];
-
-          //  AppRepoManager::getRm()->getMediaRepository()->getMedia($media);
-            
-
-
-
-
-
-
-
-
-
-
-        }
-      
-
-        if (!$logement_data) {
-            $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion du logement'));
+            $form_result->addError(new FormError('Veuillez remplir tous les champs'));
         } else {
-            $form_result->addSuccess(new FormSuccess('Le logement a bien été inséré'));
-        }
+            // redéfinition d'un nom unique pour l'image
+            $filename = uniqid() . '_' . $image_name;
+            $slug = explode('.', strtolower(str_replace(' ', '-', $filename)))[0];
+            $imgPathPublic = PATH_ROOT . $public_path . $filename;
+            // déplacement du fichier temporaire vers son dossier de destination
+            if (move_uploaded_file($tmp_path, $imgPathPublic)) { //source /destination
+                // appel du repository pour insérer dans la BDD
+                // on recrée un tableau, 'nom_colonne_denotreTable' => $nom_donné_dans_tableau_au_dessus
+                // données envoyées dans la table Adresse de la BDD
+                $adress_data = [
+                    'adress' => $adress,
+                    'zip_code' => $zipCode,
+                    'city' => $city,
+                    'country' => $country,
+                    'phone' => $phone
+                ];
+                //on stocke l'id de la ligne de l'adresse qu'on vient d'insérer
+                $adress_id = AppRepoManager::getRm()->getAdressRepository()->insertAdress($adress_data); // recupère le last ID qui a été crée
+                if (!$adress_id) {
+                    $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion de l\'adresse'));
+                } else {
+                    // données envoyées dans la table Adresse de la BDD
+                    //il faut que les clés (à gauche)correspondent exactement aux nom de la bdd, sinon elles ne sont pas prises en compte
+                    $logement_data = [
+                        'title' => $title,
+                        'description' => $description,
+                        'price_per_night' => $price,
+                        'nb_room' => $nb_room,
+                        'nb_bed' => $nb_bed,
+                        'nb_bath' => $nb_bath,
+                        'nb_traveler' => $nb_traveler,
+                        'is_active' => 1,
+                        'type_logement_id' => $type,
+                        'user_id' => $user_id,
+                        'adress_id' => intval($adress_id),
+                        'Taille' => $size,
+                    ];
 
-        //on finit toujours les formulaires avec ce genre de check de messages (avec ServerRequest en paramètre de la fonction)
-        //si on a des erreurs on les met en session pour les interpreter
-        if ($form_result->hasErrors()) {
-            Session::set(Session::FORM_RESULT, $form_result);
-            //on redirige sur la page du formulaire
-            self::redirect('/add_logement/' . $user_id);
-        }
+                    $logement_id = AppRepoManager::getRm()->getLogementRepository()->insertLogement($logement_data);
+                    if (!$logement_id) {
+                        $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion du logement'));
+                    } else {
+                        foreach ($equipements as $equipement) {
 
-        //si on a des success on les met en session pour les interpreter
-        if ($form_result->getSuccessMessage()) {
-            Session::remove(Session::FORM_RESULT);
-            Session::set(Session::FORM_SUCCESS, $form_result);
-            //on redirige sur la page mes logements
-            self::redirect('/');
+                            $equipement_data = [
+                                'logement_id' => $logement_id,
+                                'equipement_id' => $equipement
+                            ];
+                            
+                            $equipement = AppRepoManager::getRm()->getLogementEquipementRepository()->addEquipementByLogementEquipement($equipement_data);
+                            
+                            if (!$equipement) {
+                                $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion des equipements'));
+                            }
+                        }
+                        $media = [
+                            //les clés doivent correspondre aux noms de colonnes de la BDD
+                            'image_path' => $filename,
+                            'logement_id' => $logement_id
+                        ];
+                        $responseMedia = AppRepoManager::getRm()->getMediaRepository()->insertMedia($media);
+                        if (!$responseMedia) {
+                            $form_result->addError(new FormError('Une erreur est survenue lors de l\'insertion des images'));
+                        } else {
+                            $form_result->addSuccess(new FormSuccess('Le logement a bien été inséré'));
+                        }
+                    }
+                }
+            } else {
+                $form_result->addError(new FormError('Une erreur est survenue lors du transfert de l\'image'));
+            }
+
+
+            //on finit toujours les formulaires avec ce genre de check de messages (quand il y a ServerRequest en paramètre de la fonction)
+            //si on a des erreurs on les met en session pour les interpreter
+            if ($form_result->hasErrors()) {
+                Session::set(Session::FORM_RESULT, $form_result);
+                //on redirige sur la page du formulaire
+                self::redirect('/add_logement');
+            }
+
+            //si on a des success on les met en session pour les interpreter
+            if ($form_result->hasSuccess()) {
+                Session::remove(Session::FORM_RESULT);
+                Session::set(Session::FORM_SUCCESS, $form_result);
+                //on redirige sur la page mes logements
+                self::redirect('mes_logements/' . $user_id);
+            }
         }
-    
     }
 
 
@@ -185,12 +215,11 @@ var_dump($_FILES);die;
         //le controleur doit récupérer le tableau de logements via le repository, pour le donner à la vue
 
         $view_data = [
-            //la clé "meslogements" je mets le nom que je veux mais on le retrouvera dans la vue !!!
-            'meslogements' =>  AppRepoManager::getRm()->getLogementRepository()->LogementsByUserId(Session::get(Session::USER)->id)
+            //la clé "meslogements" je mets le nom que je veux mais on la retrouvera dans la vue avec le meme nom !!!
+            'meslogements' =>  AppRepoManager::getRm()->getLogementRepository()->LogementsByUserId(Session::get(Session::USER)->id),
         ];
         $view = new View('user/mes_logements');
 
         $view->render($view_data);
-
     }
 }
