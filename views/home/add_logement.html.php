@@ -84,7 +84,7 @@ use Core\Session\Session; ?>
         </div>
         <div class="form-group add-photos">
             <label for="photos">Photos du logement</label>
-            <input type="file" class="form-control-file" id="photos" name="photos">
+            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
             <small class="form-text text-muted">Sélectionnez une ou plusieurs photos (formats acceptés : JPG, JPEG, PNG, GIF).</small>
         </div>
         <div class="form-group">

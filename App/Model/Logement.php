@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\Model\Adress; // Import de la classe Adress du même namespace
+use App\Model\Adress;
 use Core\Model\Model; // Import de la classe Model du namespace Core\Model
 
 // Définition de la classe Logement qui représente un logement
@@ -28,7 +28,7 @@ class Logement extends Model
     public TypeLogement $type_logement; // Instance de la classe TypeLogement représentant le type de logement associé
     public Adress $adress;             // Instance de la classe Adress représentant l'adresse associée
 
-    public array $medias;              // Tableau des médias associés au logement. Cette propriété est un tableau qui stocke les médias associés au logement, tels que les images ou les vidéos.
+    public array $media;              // Tableau des médias associés au logement. Cette propriété est un tableau qui stocke les médias associés au logement, tels que les images ou les vidéos.
 }
 
 ?>

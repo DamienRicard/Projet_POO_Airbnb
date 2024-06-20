@@ -3,13 +3,17 @@
 <div class="container">
   <div class="row">
     <?php foreach ($meslogements as $logements) : ?>
+      
       <div class="col-md-4">
         <div class="card mb-4">
-          <?php if ($logements->image_path) : ?>
-            <img src="/assets/images/<?= $logements->image_path ?>" class="card-img-top logement-image" alt="<?= $logements->title ?>">
-          <?php else : ?>
-            <img src="/assets/images/default.jpg" class="card-img-top logement-image" alt="Image par défaut">
+
+          <!-- Itérer sur chaque image associée au logement -->
+          <?php if (!empty($logements->media)) : ?>
+            <?php foreach ($logements->media as $media) : ?>
+              <img src="/assets/images/<?= $media->image_path ?>" class="card-img-top logement-image" alt="<?= $logements->title ?>">
+            <?php endforeach; ?>
           <?php endif; ?>
+ 
           <div class="card-body">
             <h5 class="card-title"><?= $logements->title ?></h5>
             <p class="card-text"><?= $logements->description ?></p>

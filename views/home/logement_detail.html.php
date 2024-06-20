@@ -5,7 +5,7 @@
     <div class="card card-detail">
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <?php foreach ($logement->medias as $index => $media) : ?>
+          <?php foreach ($logement->media as $index => $media) : ?>
             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
               <img src="/assets/images/<?= $media->image_path ?>" class="d-block w-100" alt="Image du logement">
             </div>

@@ -8,7 +8,7 @@ use Core\Model\Model;
 // Définition de la classe Address qui représente une adresse
 //Déclare la classe Address et spécifie qu'elle étend (hérite) de la classe Model. Cela signifie que la classe Address 
 //bénéficie des propriétés et méthodes définies dans la classe Model.
-class Address extends Model
+class Adress extends Model
 {
     // Propriétés de la classe Address
     public string $address; // L'adresse sous forme de chaîne de caractères. Déclare une propriété publique nommée address de type string (chaîne de caractères). Cette propriété est destinée à stocker l'adresse.

@@ -8,9 +8,9 @@ use Core\Model\Model; // Import de la classe Model du namespace Core\Model
 class Media extends Model
 {
     // Propriétés publiques de la classe Media
-    public string $label;         // Libellé du média sous forme de chaîne de caractères
+    
     public string $image_path;    // Chemin vers l'image du média sous forme de chaîne de caractères
-    public bool $is_active;       // Indicateur d'activation du média (activé ou non)
+    
     public int $logement_id;      // Propriété représentant l'ID du logement auquel ce média est associé, typée en entier.. ID du logement auquel ce média est associé sous forme d'entier
 
     // Propriété d'association pour stocker l'objet Logement associé à ce média

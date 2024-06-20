@@ -18,8 +18,8 @@
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div class="card h-100">
             <a href="/logement_detail/<?= $logement->id ?>">
-              <?php foreach ($logement->medias as $media) : ?>
-                <img src="/assets/images/<?= $media ?>" class="card-img-top" alt="">
+              <?php foreach ($logement->media as $medias) : ?>
+                <img src="/assets/images/<?= $medias ?>" class="card-img-top" alt="">
               <?php endforeach; ?>
             </a>
             <div class="card-body">

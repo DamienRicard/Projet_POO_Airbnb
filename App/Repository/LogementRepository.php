@@ -43,7 +43,7 @@ class LogementRepository extends Repository
         // Boucle sur les résultats de la requête pour créer des objets Logement et les ajouter au tableau $array_result
         while ($row_data = $stmt->fetch()) {
             $logement = new Logement($row_data); // Création d'un nouvel objet Logement avec les données récupérées
-            $logement->medias[] = $row_data['image_path']; // Ajout du chemin de l'image au tableau medias de l'objet Logement
+            $logement->media[] = $row_data['image_path']; // Ajout du chemin de l'image au tableau medias de l'objet Logement
             $array_result[] = $logement; // Ajout de l'objet Logement au tableau $array_result
         }
 
@@ -91,7 +91,7 @@ class LogementRepository extends Repository
         $logement->type_logement = AppRepoManager::getRm()->getTypeLogementRepository()->getTypeLogementByLogementId($logement->type_logement_id);
 
         // Récupération des médias associés à ce logement et assignation au tableau medias de l'objet Logement
-        $logement->medias = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement_id);
+        $logement->media = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement_id);
 
         // Retourne l'objet Logement complet avec type de logement et médias
         return $logement;
@@ -165,7 +165,8 @@ class LogementRepository extends Repository
         // Requête SQL pour récupérer tous les logements d'un utilisateur par son ID
         $q = sprintf(
             "SELECT * FROM %s WHERE `user_id` = :user_id",
-            $this->getTableName() // Nom de la table des logements
+            $this->getTableName(), // Nom de la table des logements
+          
         );
 
         // Préparation de la requête SQL
@@ -182,6 +183,7 @@ class LogementRepository extends Repository
         // Boucle sur les résultats pour créer des objets Logement et les ajouter au tableau $array_result
         foreach ($result as $row_data) {
             $logement = new Logement($row_data); // Création d'un nouvel objet Logement avec les données récupérées
+            $logement->media =   AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement->id);
             $array_result[] = $logement; // Ajout de l'objet Logement au tableau $array_result
         }
 
