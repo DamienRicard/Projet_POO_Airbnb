@@ -1,27 +1,21 @@
-<?php use Core\Session\Session; ?>
+<?php
+
+use Core\Session\Session; ?>
 <div class="container mt-5">
-    <?php if (!$auth::isAuth()) $auth::redirect('/connexion') ?>
+  <?php if (!$auth::isAuth()) $auth::redirect('/connexion') ?>
 
-    <div class="card card-detail">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <?php foreach ($logement->media as $index => $media) : ?>
-            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-              <img src="/assets/images/<?= $media->image_path ?>" class="d-block w-100" alt="Image du logement">
-            </div>
-          <?php endforeach; ?>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+  <div class="card card-detail d-flex flex-column">
 
-      <div class="card-body card-body-detail">
+    <div class="d-flex justify-content-center">
+      <?php foreach ($logement->media as $index => $media) : ?>
+        <a href="/assets/images/<?= $media->image_path ?>" target="_blank">
+          <img src="/assets/images/<?= $media->image_path ?>" class=" img" alt="Image du logement">
+        </a>
+      <?php endforeach; ?>
+    </div>
+
+    <div class="infos-equipements">
+      <div class="card-body w-50">
         <h1 class="card-title"> <?= $logement->title ?> </h1>
         <p class="card-text"><?= $logement->description ?></p>
         <p class="card-text">Type de logement : <?= $logement->type_logement->label ?></p>
@@ -32,23 +26,64 @@
         <p class="card-text">Nombre de salles de bains : <?= $logement->nb_bath ?> </p>
         <p class="card-text">Nombre de voyageurs : <?= $logement->nb_traveler ?> </p>
       </div>
+<div>
+      <p>Equipements inclus dans ce logement :</p>
+      <div class="equipements w-50 d-flex flex-row flex-wrap">
+        
+        <?php foreach ($logement->equipements as  $equipement) : ?>
+          <div class="d-flex flex-row flex-wrap">
+            <div class="badge d-flex rounded-pill align-items-center flex-row text-dark">
+              <img style="width: 20px; height: 20px; fill: white" src="/assets/icons/icons/<?= $equipement->image_path ?>" alt="">
+              <p><?= $equipement->label ?> </p>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+</div>
     </div>
 
-    <form class="formulaire" action="/reservation_form" method="post" onsubmit="copierSpanDansHidden()">
-      <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
-      <h2>Réservations</h2>
-
-      <div class="form-group">
-        <label for="start_date">Date d'arrivée</label>
-        <input id="start_date" type="date" class="form-control" name="date_start" required />
-      </div>
-      <div class="form-group">
-        <label for="end_date">Date de départ</label>
-        <input id="end_date" type="date" class="form-control" name="date_end" required />
-      </div>
-
-      <h3>Total : <span id="total" name="price_total"> </span> €</h3>
-      <input type="hidden" id="hidden_input" name="price_total">
-      <button type="submit" class="btn btn-primary">Réserver</button>
-    </form>
   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form class="formulaire" action="/reservation_form" method="post" onsubmit="copierSpanDansHidden()">
+  <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
+  <h2>Réservations</h2>
+
+  <div class="form-group">
+    <label for="start_date">Date d'arrivée</label>
+    <input id="start_date" type="date" class="form-control" name="date_start" required>
+  </div>
+  <div class="form-group">
+    <label for="end_date">Date de départ</label>
+    <input id="end_date" type="date" class="form-control" name="date_end" required>
+  </div>
+  <div class="form-group">
+    <label for="nb_adult">Nombre d'adultes :</label>
+    <input type="number" class="form-control" id="nb_adult" name="nb_adult" value="1" required>
+  </div>
+  <div class="form-group">
+    <label for="nb_child">Nombre d'enfants :</label>
+    <input type="number" class="form-control" id="nb_child" name="nb_child" value="0" required>
+  </div>
+
+  <h4>Total : <span id="total" name="price_total"> </span> €</h4>
+  <input type="hidden" id="hidden_input" name="price_total" value="<?= $logement->price_per_night ?>">
+  <button type="submit" class="btn btn-primary">Réserver</button>
+</form>

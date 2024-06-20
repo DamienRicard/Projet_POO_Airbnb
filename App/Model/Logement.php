@@ -29,6 +29,9 @@ class Logement extends Model
     public Adress $adress;             // Instance de la classe Adress représentant l'adresse associée
 
     public array $media;              // Tableau des médias associés au logement. Cette propriété est un tableau qui stocke les médias associés au logement, tels que les images ou les vidéos.
+    public array $equipements;        // Tableau des equipements associés au logement. Cette propriété est un tableau qui stocke les equipements associés au logement, tels que les machines à laver ou les chaînes à laver.
+
+
 }
 
 ?>

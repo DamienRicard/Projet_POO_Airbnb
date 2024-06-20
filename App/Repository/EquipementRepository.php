@@ -51,9 +51,9 @@ class EquipementRepository extends Repository
 
         return $array_result; // Retourne le tableau associatif contenant les équipements par label
     }
+
+
+
+
+
 }
-
-
-
-//Cette classe EquipementRepository permet donc de gérer les opérations de récupération des équipements depuis la base de données, en les organisant par label,
-// prête à être utilisée dans l'application pour afficher ou traiter les données d'équipements.

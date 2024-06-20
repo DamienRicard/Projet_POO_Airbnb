@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\AppRepoManager;
+use App\Model\Equipement;
 use Core\Repository\Repository;
 
 class LogementEquipementRepository extends Repository
@@ -40,6 +42,45 @@ class LogementEquipementRepository extends Repository
         // Vérification si au moins une ligne a été insérée dans la table
         //rowCount() : Méthode PDO qui retourne le nombre de lignes affectées par la dernière requête SQL exécutée.
         return $stmt->rowCount() > 0; // Retourne True si au moins une ligne a été insérée, sinon False
+    }
+
+
+    /**
+     * méthode qui permet de récupérer les équipements pour chaque logement
+     * @param int $id_logement - ID du logement dont on veut les equipements
+     * @return array - Tableau d'objets Equipement associés au logement
+     */
+    public function getEquipementByLogementId(int $id_logement): array
+    {
+        $array_result = []; // Initialise un tableau vide pour stocker les resultats
+
+        // Construction de la requête SQL pour sélectionner tous les equipements pour un logement
+        $q = sprintf(
+            'SELECT e.*
+            FROM %1$s AS le 
+            INNER JOIN %2$s AS e ON le.equipement_id = e.id
+            WHERE le.`logement_id` = :id_logement',
+            $this->getTableName(),
+            AppRepoManager::getRm()->getEquipementRepository()->getTableName()
+        );
+
+        // Préparation de la requête SQL
+        $stmt = $this->pdo->prepare($q);
+
+        // Verification si la requête a echouée
+        if (!$stmt) {
+            return $array_result;
+        }
+
+        // Exécution de la requête SQL avec les paramètres de la requête
+        $stmt->execute(['id_logement' => $id_logement]);
+
+        // Boucle pour parcourir les resultats de la requête et les stocker dans $array_result
+        while ($row_data = $stmt->fetch()) {
+            $array_result[] = new Equipement($row_data);
+        }
+
+        return $array_result;
     }
 }
 

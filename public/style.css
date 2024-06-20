@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -26,7 +33,12 @@ ul, ol, li {
 }
 
 
+.main-container{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
+}
 
 /* Header styling */
 header {
@@ -172,7 +184,7 @@ nav ul li a {
   margin-bottom: 30px;
 }
 .card img {
-  height: 200px;
+  height: 300px;
   object-fit: cover;
 }
 .available {
@@ -180,6 +192,12 @@ nav ul li a {
   margin-bottom: 30px;
 }
 
+.img{
+  border-radius: 30px;
+  width: 400px !important;
+  height: 400px !important;
+  object-fit: cover !important;
+}
 
 /* CARDS */
 
@@ -268,6 +286,14 @@ nav ul li a {
   object-fit: cover;
   margin: 80px 0 100px 80px;
 }
+
+.infos-equipements{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+}
+
 
 .reserver{
   width: 200px;

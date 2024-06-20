@@ -1,3 +1,4 @@
+  </div>
   <footer id="footer">
     <nav>
       <ul class="d-flex justify-content-center footer">

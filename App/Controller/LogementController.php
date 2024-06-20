@@ -62,6 +62,7 @@ class LogementController extends Controller
   {
     // Récupération du logement par son ID depuis le repository via AppRepoManager
     $logement = AppRepoManager::getRm()->getLogementRepository()->getLogementById($id);
+    //var_dump($logement);die;
 
     // Préparation des données à transmettre à la vue
     $view_data = [
@@ -134,7 +135,7 @@ class LogementController extends Controller
     ) {
       $form_result->addError(new FormError('Veuillez renseigner tous les champs'));
     }
-// ?????????????
+    // ?????????????
     // S'il y a des erreurs, redirection vers le formulaire avec les erreurs
     if ($form_result->hasErrors()) {
       Session::set(Session::FORM_RESULT, $form_result);
@@ -146,5 +147,5 @@ class LogementController extends Controller
     Session::set(Session::FORM_SUCCESS, 'Logement ajouté avec succès');
     self::redirect('/add-logement');
   }
-// ????????????
+    // ????????????
 }

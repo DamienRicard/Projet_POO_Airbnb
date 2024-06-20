@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Model\User;
+use App\Model\Adress;
 use App\AppRepoManager;
 use App\Model\Logement;
 use Core\Repository\Repository;
@@ -91,7 +93,13 @@ class LogementRepository extends Repository
         $logement->type_logement = AppRepoManager::getRm()->getTypeLogementRepository()->getTypeLogementByLogementId($logement->type_logement_id);
 
         // Récupération des médias associés à ce logement et assignation au tableau medias de l'objet Logement
-        $logement->media = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement_id);
+        $logement->media = AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement->id);
+
+        $logement->equipements = AppRepoManager::getRm()->getLogementEquipementRepository()->getEquipementByLogementId($logement->id);
+
+        $logement->adress = AppRepoManager::getRm()->getAdressRepository()->readById(Adress::class , $logement->adress_id);
+
+        $logement->user = AppRepoManager::getRm()->getUserRepository()->readById(User::class, $logement->user_id);
 
         // Retourne l'objet Logement complet avec type de logement et médias
         return $logement;

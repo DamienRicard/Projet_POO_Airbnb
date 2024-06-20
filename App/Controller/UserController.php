@@ -26,21 +26,31 @@ class UserController extends Controller
         //Après l'insertion de la réservation, l'utilisateur est redirigé vers sa liste de
         // réservations avec self::redirect('/mes_reservations/' . $user).
         $data_form = $request->getParsedBody();
-        $result = new FormResult;
+        //var_dump($data_form);die;
+        $form_result = new FormResult;
 
         // on récup les données du formulaire, on stocke les inputs dans $price, $start...
-        $price = $data_form['price_total'];
+        $price = $data_form['price_total'] ?? 0;
         $start = $data_form['date_start'];
         $end = $data_form['date_end'];
         $user = $data_form['user_id'];
+        $adult = $data_form['nb_adult'];
+        $child = $data_form['nb_child'];
 
+
+        if (empty($price) || empty($start) || empty($end) || empty($user) || empty($adult)) {
+            $form_result->addError(new FormError('Veuillez remplir tous les champs'));
+        }
         // on recrée un tableau, nom_colonne_table => nom_donnée_stockée_dans_tableau_audessus
         $reservation_data = [
             'price_total' => $price,
             'date_start' => $start,
             'date_end' => $end,
-            'user_id' => $user
+            'user_id' => $user,
+            'nb_adult' => $adult,
+            'nb_child' => $child
         ];
+
         // données stockées dans un tableau, prêtes à être insérées var_dump($reservation_data);
         // données du formulaire var_dump($data_form); die;
 
@@ -119,7 +129,7 @@ class UserController extends Controller
         $tmp_path = $file_data['tmp_name'] ?? '';
         //la ou je veux envoyer la photo
         $public_path = 'public/assets/images/';
-        
+
         // validation du format de l'image
         if (!in_array($file_data['type'] ?? '', ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])) {
             $form_result->addError(new FormError('Le format de l\'image n\'est pas valide'));
@@ -252,5 +262,33 @@ class UserController extends Controller
         $view = new View('user/mes_logements');
 
         $view->render($view_data);
+    }
+
+    public function deleteReservation(int $caca): void
+    {
+        $form_result = new FormResult();
+
+        $deleteReservation = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($caca);
+
+        if (!$deleteReservation) {
+            $form_result->addError(new FormError('Une erreur est survenue lors de la suppression de la pizza'));
+        } else {
+            $form_result->addSuccess(new FormSuccess('Pizza désactivée avec succès'));
+        }
+
+        // gestion des erreurs
+        if ($form_result->hasErrors()) {
+            // enregistrement des erreurs en session
+            Session::set(Session::FORM_RESULT, $form_result);
+            self::redirect('/mes_reservations/' . Session::get(Session::USER)->id);
+        }
+
+        // si tout est OK, redirection vers la liste des pizzas
+        // suppression de la session form_result
+        if ($form_result->hasSuccess()) {
+            Session::set(Session::FORM_SUCCESS, $form_result);
+            Session::remove(Session::FORM_RESULT);
+            self::redirect('/mes_reservations/' . Session::get(Session::USER)->id);
+        }
     }
 }

@@ -24,8 +24,8 @@ class ReservationRepository extends Repository
     {
         // Requête SQL pour insérer une nouvelle réservation avec les champs requis
         $q = sprintf(
-            "INSERT INTO %s (`price_total`,`date_start`, `date_end`, `user_id`) 
-            VALUES (:price_total, :date_start, :date_end, :user_id)",
+            "INSERT INTO %s (`price_total`,`date_start`, `date_end`, `user_id`, `nb_adult`, `nb_child`) 
+            VALUES (:price_total, :date_start, :date_end, :user_id, :nb_adult, :nb_child)",
             $this->getTableName() // Nom de la table des réservations
         );
 
@@ -79,6 +79,29 @@ class ReservationRepository extends Repository
 
         // Retourne le tableau d'objets Reservation associés à l'utilisateur
         return $array_result;
+    }
+
+
+
+    /**
+     * Supprime une réservation
+     * @param int $reservation_id
+     * @return bool
+     */
+    public function deleteReservation(int $reservation_id): bool
+    {
+        $q = sprintf(
+            'DELETE FROM `%s` 
+            WHERE id = :id',
+            $this->getTableName()
+        );
+
+        //on prépare la requête
+        $stmt = $this->pdo->prepare($q);
+        if (!$stmt) return false;
+
+        //on vérifie si s'est bien bien executer
+        return $stmt->execute(['id' => $reservation_id]);
     }
 }
 

@@ -25,3 +25,9 @@ SELECT l.id, l.title, l.price_per_night, m.image_path
   SELECT *
             FROM reservation
             WHERE `user_id` = 12 ;
+
+
+
+SELECT *
+      FROM equipement
+      WHERE `logement_id` = :id_logement;
