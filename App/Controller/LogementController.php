@@ -150,11 +150,11 @@ class LogementController extends Controller
     // ????????????
 
 
-    public function myReservationsByHostId(int $id)
+    public function myReservationsByHostId( $id)
     {
       $view_data = [
         'reservations' => AppRepoManager::getRm()->getReservationRepository()->getReservationsByLogementId($id),
-        'media' => AppRepoManager::getRm()->getMediaRepository()->getMediaById($id),
+        'medias' => AppRepoManager::getRm()->getMediaRepository()->getMediaById($id),
   
       ];
       //var_dump($view_data);die;

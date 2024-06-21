@@ -7,21 +7,27 @@
         Vous n'avez aucune reservation pour ce logement
       </div>
     <?php else : ?>
-      <?php foreach ($reservations as $reservation) : ?>
-        <?php foreach ($media as $media) : ?>
-          <img style="width: 500px; height: 500px" src="/assets/images/<?= $media->image_path ?>" alt="">
-        <?php endforeach; ?>
-
-        <div class="card-reservation">
-          <p class="">Logement réservé </p>
-          <p class="card-text">du : <?= $reservation->date_start ?> </p>
-          <p class="card-text">au : <?= $reservation->date_end ?></p>
-          <p class="card-text">Nombre d'adultes : <?= $reservation->nb_adult ?></p>
-          <p class="card-text">Nombre d'enfants : <?= $reservation->nb_child ?></p>
-          <p class="card-text">Prix total : <?= $reservation->price_total ?> €</p>
+        <img style="width: 100%; height: 100%; border-radius: 20px" src="/assets/images/<?= $medias[0]->image_path ?>" alt="">
+      <div class="d-flex flex-wrap" >
+        <?php foreach ($reservations as $reservation) : ?>
+        <div class="detail-reservation d-flex flex-column" style="width: 18rem">
+          <div class="img-reservation">
+            
+          </div>
+          <div class=card-infos>
+            <div class="card-reservation">
+              <p class="">Logement réservé </p>
+              <p class="card-text">du : <?= $reservation->date_start ?> </p>
+              <p class="card-text">au : <?= $reservation->date_end ?></p>
+              <p class="card-text">Nombre d'adultes : <?= $reservation->nb_adult ?></p>
+              <p class="card-text">Nombre d'enfants : <?= $reservation->nb_child ?></p>
+              <p class="card-text">Prix total : <?= $reservation->price_total ?> €</p>
+            </div>
+          </div>
         </div>
-
       <?php endforeach; ?>
+      </div>
+      
     <?php endif ?>
   </div>
 </div>
