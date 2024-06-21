@@ -154,7 +154,10 @@ class LogementController extends Controller
     {
       $view_data = [
         'reservations' => AppRepoManager::getRm()->getReservationRepository()->getReservationsByLogementId($id),
+        'media' => AppRepoManager::getRm()->getMediaRepository()->getMediaById($id),
+  
       ];
+      //var_dump($view_data);die;
       $view = new View('user/mes_biens_reserves');
       $view->render($view_data);
     }

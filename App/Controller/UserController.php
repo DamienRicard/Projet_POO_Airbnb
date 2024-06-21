@@ -57,7 +57,7 @@ class UserController extends Controller
         // données du formulaire var_dump($data_form); die;
 
         $reservation_data = AppRepoManager::getRm()->getReservationRepository()->insertReservation($reservation_data);
-
+       
         self::redirect('/mes_reservations/' . $user);
     }
 
@@ -72,8 +72,10 @@ class UserController extends Controller
         //le controleur doit récupérer le tableau de réservations via le repository, pour le donner à la vue
         $view_data = [
             //la clé "reservations" je mets le nom que je veux mais on le retrouvera dans la vue !!!
-            'reservations' =>  AppRepoManager::getRm()->getReservationRepository()->ReservationsByUserId(Session::get(Session::USER)->id)
+            'reservations' =>  AppRepoManager::getRm()->getReservationRepository()->ReservationsByUserId(Session::get(Session::USER)->id),
+            
         ];
+      
         $view = new View('home/mes_reservations');
 
         $view->render($view_data);

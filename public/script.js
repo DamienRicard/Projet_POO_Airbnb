@@ -74,3 +74,5 @@ console.log(getRandomInt());
 let randomNumber = getRandomInt()
 document.getElementById('randomNumber').value = randomNumber;
 
+
+
