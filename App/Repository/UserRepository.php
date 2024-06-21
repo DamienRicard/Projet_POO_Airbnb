@@ -89,6 +89,10 @@ class UserRepository extends Repository
         // Création d'un objet User avec les données récupérées
         return new User($result);
     }
+
+
+
+    
 }
 
 ?>

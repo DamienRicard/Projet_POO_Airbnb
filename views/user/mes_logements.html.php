@@ -22,6 +22,7 @@
             <p class="card-text">Nombre de lits : <?= $logements->nb_bed ?></p>
             <p class="card-text">Nombre de salles de bain : <?= $logements->nb_bath ?></p>
             <p class="card-text">Nombre de voyageurs maximum : <?= $logements->nb_traveler ?></p>
+            <a href="/mes_biens_reserves/<?= $logements->id ?>" class="btn btn-primary">voir les réservations</a>
           </div>
         </div>
       </div>

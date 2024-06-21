@@ -83,7 +83,7 @@ class AuthController extends Controller
             ];
 
             // Ajout de l'utilisateur via le repository
-            AppRepoManager::getRm()->getUserRepository()->addUser($data_user);
+           $user = AppRepoManager::getRm()->getUserRepository()->addUser($data_user);
         }
 
         // Redirection en cas d'erreurs

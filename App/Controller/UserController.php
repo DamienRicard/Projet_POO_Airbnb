@@ -36,9 +36,10 @@ class UserController extends Controller
         $user = $data_form['user_id'];
         $adult = $data_form['nb_adult'];
         $child = $data_form['nb_child'];
+        $logement_id = $data_form['logement_id'];
 
 
-        if (empty($price) || empty($start) || empty($end) || empty($user) || empty($adult)) {
+        if (empty($price) || empty($start) || empty($end) || empty($user) || empty($adult) || empty($child) || empty($logement_id)) {
             $form_result->addError(new FormError('Veuillez remplir tous les champs'));
         }
         // on recrée un tableau, nom_colonne_table => nom_donnée_stockée_dans_tableau_audessus
@@ -48,7 +49,8 @@ class UserController extends Controller
             'date_end' => $end,
             'user_id' => $user,
             'nb_adult' => $adult,
-            'nb_child' => $child
+            'nb_child' => $child,
+            'logement_id' => $logement_id
         ];
 
         // données stockées dans un tableau, prêtes à être insérées var_dump($reservation_data);
@@ -264,11 +266,11 @@ class UserController extends Controller
         $view->render($view_data);
     }
 
-    public function deleteReservation(int $caca): void
+    public function deleteReservation(int $id): void    //$id je mets le nom que je veux mais il faudra le même nom dans App pour la route !
     {
         $form_result = new FormResult();
 
-        $deleteReservation = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($caca);
+        $deleteReservation = AppRepoManager::getRm()->getReservationRepository()->deleteReservation($id);
 
         if (!$deleteReservation) {
             $form_result->addError(new FormError('Une erreur est survenue lors de la suppression de la pizza'));

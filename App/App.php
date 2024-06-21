@@ -79,13 +79,17 @@ class App implements DatabaseConfigInterface
     // Route qui redirige vers la page où l'utilisateur peut voir ses logements qu'il a mis en location.
     $this->router->get('/mes_logements/{id}', [UserController::class, 'myLogementsByUserId']);
     // Route qui permet à l'utilisateur de supprimer une réservation.
-    $this->router->get('/delete_reservation/{caca}', [UserController::class, 'deleteReservation']);
+    $this->router->get('/delete_reservation/{id}', [UserController::class, 'deleteReservation']);
+    
 
     // PARTIE LOGEMENTS
     $this->router->get('/', [LogementController::class, 'getLogements']);
     $this->router->get('/logement_detail/{id}', [LogementController::class, 'getLogementById']);
     $this->router->get('/add_logement', [LogementController::class, 'addLogement']);
     $this->router->post('/add_logement_form', [UserController::class, 'addLogementForm']);
+
+    // Route qui permet à l'hôte de voir ses biens réservés
+    $this->router->get('/mes_biens_reserves/{id}', [LogementController::class, 'myReservationsByHostId']);
   }
 
   // 3. méthode qui démarre le router.

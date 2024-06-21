@@ -148,4 +148,14 @@ class LogementController extends Controller
     self::redirect('/add-logement');
   }
     // ????????????
+
+
+    public function myReservationsByHostId(int $id)
+    {
+      $view_data = [
+        'reservations' => AppRepoManager::getRm()->getReservationRepository()->getReservationsByLogementId($id),
+      ];
+      $view = new View('user/mes_biens_reserves');
+      $view->render($view_data);
+    }
 }

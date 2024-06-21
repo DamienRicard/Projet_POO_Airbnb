@@ -42,7 +42,7 @@ ul, ol, li {
 
 /* Header styling */
 header {
-  background-color: #1652b4;
+  background-color: #fdfeff;
   padding: 10px 0;
 }
 
@@ -73,7 +73,7 @@ header {
 
 /* Links styling */
 .navbar ul li a {
-  color: #fff;
+  color: rgb(255, 90, 95);
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s;
@@ -82,8 +82,8 @@ header {
 
 /* Hover effect for links */
 .navbar ul li a:hover {
-  color: rgb(255, 90, 95);
-  border: 2px solid white;
+  color: #F5385C;
+  border: 2px solid #F5385C;
   border-radius: 5px;
 }
 
@@ -91,8 +91,11 @@ header {
 .custom-link {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: #F5385C;
+  border: 1px solid transparent;
 }
+
+
 
 /* Icon styling */
 .custom-svg {
@@ -114,7 +117,7 @@ nav ul li {
 
 /* Profile menu links styling */
 nav ul li a {
-  color: #fff;
+  color: #F5385C;
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s;
@@ -123,19 +126,19 @@ nav ul li a {
 
 /* Dropdown menu styling */
 .dropdown-menu {
-  background-color: #444;
+  background-color: #000000;
   border: none;
 }
 
 /* Dropdown menu items styling */
 .dropdown-menu .dropdown-item {
-  color: #fff;
+  color: #F5385C;
   transition: background-color 0.3s;
 }
 
 /* Hover effect for dropdown menu items */
 .dropdown-menu .dropdown-item:hover {
-  background-color: #555;
+  background-color: #fdf8f9;
 }
 
 /* Profile menu styling */
@@ -152,23 +155,31 @@ nav ul li a {
 
 /* Profile menu links styling */
 .profile-menu li a {
-  color: #fff;
+  color: #F5385C;
   font-size: 18px;
   padding: 12px;
   text-decoration: none;
   transition: color 0.3s;
+  border: 1px solid transparent;
 }
 
 /* Hover effect for profile menu links */
 .profile-menu li a:hover {
   border: 2px solid white;
   border-radius: 5px;
-  color: rgb(255, 90, 95);
+  color: #f5385c;
+  border: 1px solid #F5385C;
+}
+
+.dropdown-divider{
+  background-color: white;
 }
 
 
 /* Index Page */
-
+.sous-titre{
+  font-size: 20px;
+}
 
 .accueil {
   margin: 50px auto; /* Centre horizontalement et ajoute une marge en haut et en bas */
@@ -188,8 +199,8 @@ nav ul li a {
   object-fit: cover;
 }
 .available {
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin: 50px 0 30px 60px;
+  text-decoration:underline ;
 }
 
 .img{
@@ -217,6 +228,7 @@ nav ul li a {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  
 }
 
 /* Card image styling */
@@ -230,7 +242,7 @@ nav ul li a {
 
 /* Card body styling */
 .card-body {
-  padding: 20px;
+  padding: 0px !important;
   flex-grow: 1; /* Pour que le corps de la carte prenne toute la hauteur disponible */
   display: flex;
   flex-direction: column;
@@ -255,25 +267,40 @@ nav ul li a {
 
 /* Button styling */
 .btn {
-  width: 40%;
+  
   text-align: center;
-  padding: 10px 0;
-  background-color: #2914ea;
+  padding: 10px 10px;
+  margin: 0 auto;
+  background-color: #F5385C;
   color: #fff;
   text-decoration: none;
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+  opacity: 0.9;
+  border:1px solid transparent;
+}
 
+.btn-reserver{
+  width: 20%;
+  background-color: #F5385C;
+  
+  margin-top: 20px;
 }
 
 .btn:hover {
-  background-color: #070707;
-  color: rgb(255, 90, 95);
+  background-color: #f9fcff;
+  color: #F5385C;
   font-weight: bold;
+  border:1px solid #F5385C;
 }
 
 /* DETAIL DES LOGEMENTS */
+
+.container-detail{
+margin: 0 100px;
+}
+
 .card-detail{
   display: flex;
   flex-direction: row;
@@ -322,8 +349,13 @@ nav ul li a {
 .formulaire{
   display: flex;
   flex-direction: column;
-  width: 20%;
-  margin-left: 80px;
+  width: 100%;
+  padding: 60px 0px;
+  margin :0 auto;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  background-color: #f5f2f2;
+  box-shadow: #a8a8a8 0px 0px 8px;
 }
 
 
@@ -424,15 +456,12 @@ nav ul li a {
 
 /* FOOTER */
 
-#footer{
+.footer{
   width: 100%;
   height: 150px;
   background-color: #020202;
 }
 
-.footer{
-  padding-top: 60px;
-}
 
 /* MES LOGEMENTS */
 

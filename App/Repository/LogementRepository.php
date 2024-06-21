@@ -197,5 +197,40 @@ class LogementRepository extends Repository
 
         return $array_result; // Retourne le tableau de logements associés à l'utilisateur
     }
+
+
+    /**
+     * Methode qui permet à l'hôte de voir ses biens qui sont loués
+     */
+    public function myReservationsByHostId(int $user_id)
+    {
+        // Requête SQL pour récupérer tous les logements d'un utilisateur par son ID
+        $q = sprintf(
+            "SELECT * FROM %s WHERE `user_id` = :user_id",
+            $this->getTableName(), // Nom de la table des logements
+          
+        );
+
+        // Préparation de la requête SQL
+        $stmt = $this->pdo->prepare($q);
+
+        // Exécution de la requête SQL en passant l'ID de l'utilisateur comme paramètre
+        $stmt->execute(['user_id' => $user_id]);
+
+        // Récupération de tous les résultats de la requête sous forme de tableau
+        $result = $stmt->fetchAll();
+
+        $array_result = []; // Déclaration d'un tableau vide pour stocker les logements récupérés
+
+        // Boucle sur les résultats pour créer des objets Logement et les ajouter au tableau $array_result
+        foreach ($result as $row_data) {
+            $logement = new Logement($row_data); // Création d'un nouvel objet Logement avec les données récupérées
+            $logement->media =   AppRepoManager::getRm()->getMediaRepository()->getMediaById($logement->id);
+            $logement->reservations  = AppRepoManager::getRm()->getReservationRepository()->getReservationsByLogementId($logement->id);
+            $array_result[] = $logement; // Ajout de l'objet Logement au tableau $array_result
+        }
+       
+        return $array_result; // Retourne le tableau de logements associés à l'utilisateur
+    }
 }
 
