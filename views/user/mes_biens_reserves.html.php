@@ -17,11 +17,11 @@
           <div class=card-infos>
             <div class="card-reservation">
               <p class="">Logement réservé </p>
-              <p class="card-text">du : <?= $reservation->date_start ?> </p>
-              <p class="card-text">au : <?= $reservation->date_end ?></p>
+              <p class="card-text">Du : <?= $reservation->date_start ?> </p>
+              <p class="card-text">Au : <?= $reservation->date_end ?></p>
               <p class="card-text">Nombre d'adultes : <?= $reservation->nb_adult ?></p>
               <p class="card-text">Nombre d'enfants : <?= $reservation->nb_child ?></p>
-              <p class="card-text">Prix total : <?= $reservation->price_total ?> €</p>
+              <p class="card-text">Prix total du séjour : <?= $reservation->price_total ?> €</p>
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@ use Core\Session\Session; ?>
   <form class="formulaire" action="/reservation_form" method="post" onsubmit="copierSpanDansHidden()">
     <input type="hidden" name="user_id" value="<?= Session::get(Session::USER)->id ?>">
     <input type="hidden" name="logement_id" value="<?= $logement->id ?>">
-    <h2 class="mb-5 text-center">Réservations</h2>
+    <h2 class="mb-2 text-center">Réservations</h2>
     <div class="d-flex w-60 gap-5">
       <div class="dates w-100 m-5">
         <div class="form-group">

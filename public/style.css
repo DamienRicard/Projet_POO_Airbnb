@@ -244,7 +244,7 @@ nav ul li a {
 }
 
 .card-reservation {
-  background-color: #aed0f0;
+  background-color: #f5385c;
   box-shadow: #a8a8a8 0px 5px 15px;
   border-radius: 10px;
 }
@@ -346,8 +346,8 @@ nav ul li a {
 .formulaire {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 60px 0px;
+  width: 70%;
+  padding: 30px 0px;
   margin: 0 auto;
   margin-bottom: 30px;
   border-radius: 8px;
@@ -376,7 +376,7 @@ nav ul li a {
   padding: 25px 20px;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
-  background-color: #1652b4;
+  background-color: #f5385c;
 }
 
 .detail-description {
@@ -395,16 +395,16 @@ nav ul li a {
 
 .call-action {
   padding: 10px;
-  background-color: #050506;
-  color: #fff;
+  background-color: #fff;
+  color: #f5385c;
   text-decoration: none;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 .call-action:hover {
-  background-color: #454549;
-  color: #21b914;
+  background-color:#f5385c ;
+  color:#fff;
   font-weight: bold;
   box-shadow: none;
 }
@@ -422,7 +422,7 @@ nav ul li a {
   border-radius: 8px;
   color: #fff;
   padding: 5px 10px;
-  background-color: #1652b4;
+  background-color: #f5385c;
   font-weight: normal;
 }
 
@@ -495,4 +495,11 @@ nav ul li a {
   flex-wrap: wrap;
   margin: 50px;
   gap: 20px;
+}
+
+
+.table{
+
+ padding: 20px;
+ 
 }

@@ -3,6 +3,8 @@
 <h3 class="title-reservation">Mes réservations</h3>
 
 <!--$reservations vient du Controller UserController (car c'est lui qui appelle la vue home/mes_reservations) et de la fonction myReservationsByUserId -->
+
+<div class= " table">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -27,3 +29,4 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+</div>
