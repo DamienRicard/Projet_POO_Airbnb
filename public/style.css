@@ -73,7 +73,7 @@ header {
 
 /* Links styling */
 .navbar ul li a {
-  color: rgb(255, 90, 95);
+  color: #f5385c;
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s;
@@ -162,10 +162,10 @@ nav ul li a {
 
 /* Hover effect for profile menu links */
 .profile-menu li a:hover {
-  border: 2px solid white;
+  
   border-radius: 5px;
   color: #f5385c;
-  border: 1px solid #f5385c;
+  border: 2px solid #f5385c;
 }
 
 .dropdown-divider {
